@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html ng-app>
+<head>
+    <link rel="stylesheet" href="../css/bootstrap.css"/>
+    <script src="../lib/angular.js"></script>
+    <script src="solution/userstorage.js"></script>
+    <script src="solution/users.js"></script>
+</head>
+<body ng-controller="UsersCtrl">
+
+<div class="well">
+    <h3>Manage users</h3>
+    <form>
+        <div class="form-group">
+            <label for="id">Id: </label>
+            <input type="text" readonly id="id" class="form-control"/>
+        </div>
+        <div class="form-group">
+            <label for="login">Login: </label>
+            <input type="text"  id="login" class="form-control"/>
+        </div>
+        <div class="form-group">
+            <label for="name">Name: </label>
+            <input type="text" id="name" class="form-control"/>
+        </div>
+        <div class="form-group">
+            <label for="birthDate">Date of birth: </label>
+            <input type="text"  id="birthDate" class="form-control"/>
+        </div>
+        <button  class="btn btn-primary">Save</button>
+        <button  class="btn btn-warning">Clear</button>
+    </form>
+</div>
+
+<table class="table table-bordered">
+    <tr>
+        <th>Id</th>
+        <th>Login</th>
+        <th>Name</th>
+        <th>Date of birth</th>
+        <th>Tools</th>
+    </tr>
+    <tr >
+        <td>{{user.id}}</td>
+        <td>{{user.login}}</td>
+        <td>{{user.name}}</td>
+        <td>{{user.birthDate}}</td>
+        <td>
+            <span  title="Edit" class="glyphicon glyphicon-edit"></span>
+            <span  title="Remove" class="glyphicon glyphicon-trash"></span>
+        </td>
+    </tr>
+</table>
+
+</body>
+</html>

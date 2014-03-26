@@ -1,0 +1,111 @@
+<section>
+
+    <section>
+        <h2>Modules and Dependency Injection</h2>
+        <blockquote>
+            "I was expecting a paradigm shift, and all I got was a lousy constructor"
+        </blockquote>
+    </section>
+
+    <section>
+        <h2>A bit of theory</h2>
+        <ul>
+            <li><code>$provide</code> allows us to register recipes for object creation</li>
+            <li>"Recipes" are grouped into modules</li>
+            <li><code>$injector</code> gives access to singletons produced based on those recipes</li>
+            <li>Singleton instances are called "services"</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>We need a module first</h2>
+<pre><code ng-non-bindable>
+    angular.module('app', []);
+</code></pre>
+    </section>
+
+    <section>
+        <h2>DI in AngularJS accepts various recipes</h2>
+        <ul>
+            <li>Values</li>
+            <li>Services</li>
+            <li>Factories</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Values</h2>
+        <pre><code ng-non-bindable><%= includeCode('presentation/tpls/day1/src/di.js', 'value') %></code></pre>
+    </section>
+
+    <section>
+        <h2>Services</h2>
+        <pre><code ng-non-bindable><%= includeCode('presentation/tpls/day1/src/di.js', 'service') %></code></pre>
+    </section>
+
+    <section>
+        <h2>Factoriess</h2>
+        <pre><code ng-non-bindable><%= includeCode('presentation/tpls/day1/src/di.js', 'factory') %></code></pre>
+    </section>
+
+    <section>
+        <h2>In reality things are a bit more complex...</h2>
+        <h3>2-phase lifecycle</h3>
+        <ul>
+            <li>Configure</li>
+            <li>Run</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Modules accept various recipes</h2>
+        <ul>
+            <li>Values</li>
+            <li>Services</li>
+            <li>Factories</li>
+            <hr/>
+            <li>Constants</li>
+            <li>Providers</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Constants</h2>
+        <pre><code ng-non-bindable><%= includeCode('presentation/tpls/day1/src/di.js', 'constant') %></code></pre>
+    </section>
+
+    <section>
+        <h2>Providers</h2>
+        <pre><code ng-non-bindable><%= includeCode('presentation/tpls/day1/src/di.js', 'provider') %></code></pre>
+    </section>
+
+    <section>
+        <h2>Modules can depend on other modules</h2>
+<pre><code ng-non-bindable>
+    angular.module('app', ['userManagement', 'commonHelpers'])
+</code></pre>
+    </section>
+
+    <section>
+        <h2>Modules do not _not_ form namespaces!</h2>
+        <pre><code ng-non-bindable><%= includeCode('presentation/tpls/day1/src/di.js', 'clash') %></code></pre>
+        <h4>But they do prevent pollution of the global JS namespace.</h4>
+    </section>
+
+    <section>
+        <h2>Registering controllers on modules</h2>
+        <pre><code ng-non-bindable><%= includeCode('exercises/03_modules_and_di/solution/users.js', 'ctrl') %></code></pre>
+    </section>
+
+    <section>
+        <h2>AngularJS modules and testing</h2>
+        <pre><code ng-non-bindable><%= includeCode('exercises/03_modules_and_di/solution/users.spec.js', 'module') %></code></pre>
+    </section>
+
+    <section>
+        <h1>Exercise</h1>
+        <h2 stopwatch="30"></h2>
+        <p>Turn code from the previous exercise into its modular equivalent.</p>
+    </section>
+
+</section>

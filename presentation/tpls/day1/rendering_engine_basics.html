@@ -1,0 +1,79 @@
+<section>
+
+    <section>
+        <h1>AngularJS rendering engine</h1>
+    </section>
+
+    <section>
+        <h2>From static web to... web applications!</h2>
+    </section>
+
+    <section>
+        <h2>From declarative HTML to...</h2>
+        <table style="width: 100%">
+            <tr>
+                <td style="width: 30%">
+<pre><code><span id="greeting">
+    Hello World!
+</span></code></pre>
+                </td>
+                <td style="width: 70%">
+                    <pre><code><%= includeCode('presentation/tpls/day1/src/hello.js') %></code></pre>
+                </td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <h2>We need a superheroic framework!</h2>
+        <img src="http://img.gawkerassets.com/img/18lshnw1rawjgjpg/ku-xlarge.jpg" alt=""/>
+    </section>
+
+    <section>
+        <h2>We need better abstractions</h2>
+        <blockquote>
+            "Angular is what the web browser would have been, had it been designed for applications"
+        </blockquote>
+        <p><i>Miško Hevery</i></p>
+        <br>
+        <pre><code ng-non-bindable><span>Hello {{name}}!</span></code></pre>
+    </section>
+
+    <section>
+        <h2>Live coding!</h2>
+        <h4>To see some of AngularJS concepts in action.</h4>
+    </section>
+
+    <section>
+        <h2>It is not string-based template!</h2>
+        <table style="width: 100%">
+            <tr>
+                <td style="width: 50%">
+                    <h4>String-based templates</h4>
+                    <img src="http://docs.angularjs.org/img/One_Way_Data_Binding.png" alt=""/>
+                </td>
+                <td style="width: 50%">
+                    <h4>AngularJS</h4>
+                    <img src="http://docs.angularjs.org/img/Two_Way_Data_Binding.png" alt=""/>
+                </td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <h2>Rendering engine - takeaways</h2>
+        <ul>
+            <li>Automatic refresh, no need to say "render"</li>
+            <li>Declarative UI driven by model</li>
+            <li>Model is just plain JavaScript</li>
+        </ul>
+    </section>
+
+    <section>
+        <h1>Exercise</h1>
+        <h2 stopwatch="40"></h2>
+        <p>Make the user-management page live.</p>
+        <p>Check tests.</p>
+    </section>
+
+</section>
