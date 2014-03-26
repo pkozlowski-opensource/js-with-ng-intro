@@ -6,8 +6,8 @@ js-with-ng-intro
 * Install node.js with npm: http://nodejs.org/download/
 * Installing node.js should install the `npm` (Node Package Manager) command in your system
 * Open a terminal window and type:
-** `npm install -g gulp` to globally install Gulp (http://gulpjs.com/) build tool
-** `npm install` to locally install dependencies of this project
+    * `npm install -g gulp` to globally install Gulp (http://gulpjs.com/) build tool
+    * `npm install` to locally install dependencies of this project
 * Run `gulpt` to test your installation and build the project
 
 ### Running examples
