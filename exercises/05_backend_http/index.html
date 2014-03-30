@@ -48,15 +48,11 @@
         <th>Date of birth</th>
         <th>Tools</th>
     </tr>
-    <!-- slide:start:filter; -->
     <tr ng-repeat="user in users | filter:filterCriteria | limitTo:20">
         <td>{{user._id.$oid}}</td>
         <td>{{user.login}}</td>
         <td>{{user.name}}</td>
-        <!-- slide:end -->
-        <!-- slide:start:date; -->
         <td>{{user.birthDate | date:'YYYY-MM-dd'}}</td>
-        <!-- slide:end -->
         <td>
             <span ng-click="edit(user)" title="Edit" class="glyphicon glyphicon-edit"></span>
             <span ng-click="remove(user._id.$oid)" title="Remove" class="glyphicon glyphicon-trash"></span>

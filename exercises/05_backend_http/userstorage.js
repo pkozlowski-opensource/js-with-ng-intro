@@ -28,9 +28,6 @@ angular.module('userstorageHttp', [])
     };
 
     UserStorage.getById = function (userId) {
-      return $http.get(BASE_URL + '/' + userId, {params: {
-        apiKey: API_KEY
-      }}).then(getResponseData);
     };
 
     UserStorage.getAll = function () {

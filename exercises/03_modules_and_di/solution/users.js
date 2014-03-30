@@ -1,9 +1,9 @@
 //slide:start:ctrl;
 angular.module('users', [])
 
-  // ex:start
   .controller('UsersCtrl', function ($scope, UserStorage) {
 
+    // ex:start
     $scope.cleanUser = {};
     $scope.users = UserStorage.getAll();
 
@@ -25,6 +25,7 @@ angular.module('users', [])
       $scope.cleanUser = angular.copy(user);
       $scope.clear();
     };
+    //ex:end
 
     $scope.hasEdits = function () {
       return !angular.equals($scope.user, $scope.cleanUser);
@@ -36,4 +37,3 @@ angular.module('users', [])
 
     $scope.clear();
   });
-  //ex:end

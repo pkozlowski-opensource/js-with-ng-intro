@@ -20,7 +20,7 @@ module.exports = function () {
         } else if (s(line).contains('ex:end')) {
           inExercise = false;
         } else {
-          if (!inExercise) {
+          if (!inExercise && !s(line).contains('slide:')) {
             targetLines.push(line);
           }
         }

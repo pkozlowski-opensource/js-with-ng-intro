@@ -5,11 +5,9 @@ angular.module('usersHttp', [])
     $scope.cleanUser = {};
 
     function refreshUsersList() {
-      //slide:start:client;
       UserStorage.getAll().then(function (users) {
         $scope.users = users;
       });
-      //slide:end:client;
     }
 
     $scope.save = function () {

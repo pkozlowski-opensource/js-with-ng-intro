@@ -16,12 +16,10 @@ describe('Async user storage', function () {
   }));
 
   // we want to have strict control over back-end interactions here
-  // slide:start:strict;
   afterEach(function() {
     $httpBackend.verifyNoOutstandingExpectation();
     $httpBackend.verifyNoOutstandingRequest();
   });
-  // slide:end;
 
 
   function withUrl(urlSuffix) {
@@ -41,13 +39,28 @@ describe('Async user storage', function () {
 
     it('should support adding new users', function () {
 
+      $httpBackend.expectPOST(withUrl('')).respond(testUser);
+
+      userStorage.save({
+        name: 'Pawel'
+      }).then(function(savedUser){
+          expect(savedUser._id.$oid).toEqual('123');
+        }, onFail);
+
+      // time machine!
+      $httpBackend.flush();
     });
 
     it('should update an existing user when save called on a user with a defined id', function () {
 
+      $httpBackend.expectPUT(withUrl('/123')).respond(testUser);
+
+      userStorage.save(testUser).then(function(savedUser){
+        expect(savedUser._id.$oid).toEqual('123');
+      }, onFail);
+      $httpBackend.flush();
     });
 
-    // slide:start:test;
     it('should support querying users by id', function () {
 
       $httpBackend.expectGET(withUrl('/123')).respond(testUser);
@@ -58,13 +71,27 @@ describe('Async user storage', function () {
 
       $httpBackend.flush();
     });
-    // slide:end;
 
     it('should allow querying all users', function () {
 
+      $httpBackend.expectGET(withUrl('')).respond([testUser]);
+
+      userStorage.getAll().then(function(users) {
+        expect(users[0]._id.$oid).toEqual('123');
+      }, onFail);
+
+      $httpBackend.flush();
     });
 
     it('should support removing users by id', function () {
+
+      $httpBackend.expectDELETE(withUrl('/123')).respond(testUser);
+
+      userStorage.remove('123').then(function(deletedUser) {
+        expect(deletedUser._id.$oid).toEqual('123');
+      }, onFail);
+
+      $httpBackend.flush();
     });
 
   });

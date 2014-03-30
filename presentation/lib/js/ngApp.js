@@ -47,4 +47,20 @@ angular.module('app', [])
         }
       });
     }
+  })
+
+  .directive('blink', function($interval){
+    return {
+      restrict: 'EA',
+      link: function(scope, element) {
+
+        var visible = true;
+
+        $interval(function(){
+          element.css('display', visible ? 'block' : 'none');
+          visible = !visible;
+        }, 1000);
+
+      }
+    }
   });

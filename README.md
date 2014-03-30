@@ -8,7 +8,7 @@ js-with-ng-intro
 * Open a terminal window and type:
     * `npm install -g gulp` to globally install Gulp (http://gulpjs.com/) build tool
     * `npm install` to locally install dependencies of this project
-* Run `gulpt` to test your installation and build the project
+* Run `gulp` to test your installation, build the project and run all the unit tests
 
 ### Running examples
 

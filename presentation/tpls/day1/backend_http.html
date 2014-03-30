@@ -10,6 +10,7 @@
         <a target="_blank" href="https://support.mongolab.com/entries/20433053-Is-there-a-REST-API-for-MongoDB-">REST MongoDB API in the cloud</a><br>
     </section>
 
+
     <section>
         <h2>$http service</h2>
         <pre><code ng-non-bindable><%= includeCode('exercises/05_backend_http/solution/userstorage.js', 'api') %></code></pre>
@@ -21,12 +22,11 @@
     </section>
 
     <section>
-        <h2>We need better tools to work in the asynchronous World</h2>
+        <h2>We need better abstractions to work in the asynchronous World</h2>
         <ul>
             <ul>
                 <li>When the $http method call ends, results are not ready</li>
                 <li>When an error occurs there is no-one to catch it</li>
-                <li>Chaining calls becomes difficult (callback hell)</li>
             </ul>
         </ul>
     </section>
@@ -41,7 +41,12 @@
 
     <section>
         <h2>Callbacks are not cool</h2>
-        <img src="http://www.qlanguage.com.hk/wp-content/uploads/2013/09/it-stinks-300x300.jpg">
+        <img src="http://www.qlanguage.com.hk/wp-content/uploads/2013/09/it-stinks-300x300.jpg"><br/>
+        <ul>
+            <li>Chained calls ("callbacks hell")</li>
+            <li>Error handling</li>
+            <li>Parallel calls</li>
+        </ul>
     </section>
 
     <section>
@@ -50,16 +55,6 @@
         <pre><code ng-non-bindable><%= includeCode('exercises/05_backend_http/solution/userstorage.js', 'api') %></code></pre>
         <h4>Controller</h4>
         <pre><code ng-non-bindable><%= includeCode('exercises/05_backend_http/solution/users.js', 'client') %></code></pre>
-    </section>
-
-    <section>
-        <h1>Exercise</h1>
-        <h2 stopwatch="30"></h2>
-        <p>Change the UserStorage service to work with the MongoLab REST API.</p>
-    </section>
-
-    <section>
-        <h2>Bonus: testing</h2>
     </section>
 
     <section>
@@ -77,6 +72,15 @@
         <h2>2 ways of expressing expectations</h2>
         <h3>Code oriented vs. back-end oriented</h3>
         <a href="http://docs.angularjs.org/api/ngMock.$httpBackend" target="_blank">expect vs. when</a>
+        <p>(or application-focused vs. backend-focused)</p>
     </section>
+
+    <section>
+        <h1>Exercise</h1>
+        <h2 stopwatch="30"></h2>
+        <p>Change the UserStorage service to work with the MongoLab REST API.</p>
+        <p>Check tests and make them pass.</p>
+    </section>
+
 
 </section>

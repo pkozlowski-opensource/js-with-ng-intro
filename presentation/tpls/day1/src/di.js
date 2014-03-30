@@ -1,17 +1,17 @@
 //slide:start:value;
 angular.module('app', []).value('userstorage', new UserStorage());
-//slide:end
+//slide:end:value;
 
 //slide:start:service;
 angular.module('app', []).service('userstorage', UserStorage);
-//slide:end
+//slide:end:service;
 
 //slide:start:factory;
 angular.module('app', []).service('factory', function(){
     return new UserStorage();
     // or simply define it here
   });
-//slide:end
+//slide:end:factory;
 
 //slide:start:constant;
 angular.module('userstorage', [])

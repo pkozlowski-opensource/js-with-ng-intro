@@ -10,6 +10,9 @@
 <pre><code ng-non-bindable>
     {{user.birthDate | date:'YYYY-MM-dd'}}
 </code></pre>
+<pre><code ng-non-bindable>
+    {{date(user.birthDate, 'YYYY-MM-dd')}}
+</code></pre>
         <ul>
             <li>Global UI formatting / transforming functions</li>
             <li>Built-in filters: formatting and arrays filtering</li>

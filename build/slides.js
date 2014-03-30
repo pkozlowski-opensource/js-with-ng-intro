@@ -2,12 +2,25 @@ var fs = require('fs');
 var path = require('path');
 
 var template = require('lodash').template;
-var escapeHtml = require('escape-html');
 var s = require('string');
 
 
+function trimLeadingWS(contents) {
+  var lines = contents.split('\n');
+  if (lines.length > 0) {
+    var leadingWS = lines[0].length - lines[0].replace(/^\s+/, '').length;
+    if (leadingWS) {
+      return lines.map(function(line){
+        return line.substr(leadingWS-1);
+      }).join('\n');
+    }
+  }
+
+  return contents;
+}
+
 function removeExerciseMarkers(contents) {
-  return contents.split('\n').filter(function(line){
+  return (contents || '').split('\n').filter(function(line){
     return !(s(line).contains('ex:start') || s(line).contains('ex:end'));
   }).join('\n');
 }
@@ -36,7 +49,7 @@ function includeCode(codePath, fragment) {
     }
   });
 
-  return escapeHtml(removeExerciseMarkers(fragments[fragment]));
+  return s(trimLeadingWS(removeExerciseMarkers(fragments[fragment]))).escapeHTML().toString();
 }
 
 function includeSlides(slidePath) {

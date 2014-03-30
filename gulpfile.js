@@ -1,10 +1,13 @@
 var gulp = require('gulp');
 var gutil = require('gulp-util');
 var template = require('gulp-template');
+var jshint = require('gulp-jshint');
 var lodash = require('lodash');
 
 var connect = require('connect');
 var http = require('http');
+var path = require('path');
+var fs = require('fs');
 var karma = require('karma').server;
 
 var exercise = require('./build/exercises.js');
@@ -19,24 +22,24 @@ function karmaExit(exitCode) {
 var karmaDefaultConf = {
   browsers: ['Chrome'],
   files: [
+    'exercises/lib/jquery-1.10.2.js',
+    'exercises/lib/moment.js',
     'exercises/lib/angular.js',
     'exercises/lib/angular-mocks.js',
-    'exercises/**/solution/*.js'],
-  frameworks: ['jasmine']
+    'exercises/**/solution/*.js',
+    'exercises/**/solution/*.tpl.html'
+  ],
+  frameworks: ['jasmine'],
+  preprocessors: {
+    '**/*.html': ['ng-html2js']
+  },
+  ngHtml2JsPreprocessor: {
+    cacheIdFromPath: function(filepath) {
+      return path.basename(filepath);
+    },
+    moduleName: 'templates'
+  }
 };
-
-//Gulp tasks
-gulp.task('default', ['test']);
-
-gulp.task('www', function () {
-
-  var app = connect();
-  app.use(connect.static(__dirname + '/exercises'));
-  app.use(connect.directory(__dirname + '/exercises'));
-
-  gutil.log('Starting WWW server at http://localhost:8000');
-  http.createServer(app).listen(8000);
-});
 
 gulp.task('test', function () {
   karma.start(lodash.assign({}, karmaDefaultConf, {singleRun: true}), karmaExit);
@@ -46,18 +49,23 @@ gulp.task('tdd', function () {
   karma.start(lodash.assign({}, karmaDefaultConf), karmaExit);
 });
 
-// internal helper tasks - to be deleted before the presentation
-
-gulp.task('slides', function () {
-  gulp.src('presentation/tpls/index.html')
-    .pipe(template(slides))
-    .pipe(gulp.dest('presentation'));
+gulp.task('lint', function() {
+  gulp.src('exercises/**/solution/*.js')
+    .pipe(jshint())
+    .pipe(jshint.reporter('default'));
 });
 
-gulp.task('slidesw', function () {
-  gulp.watch(['presentation/index.html', 'presentation/tpls/**/*.*'], ['slides']);
-});
+//Gulp tasks
+gulp.task('default', ['lint', 'test']);
 
-gulp.task('exercises', function () {
-  gulp.src('exercises/**/solution/*.*').pipe(exercise()).pipe(gulp.dest('exercises'));
+gulp.task('www', function () {
+
+  var port = 8005;
+
+  var app = connect();
+  app.use(connect.static(__dirname + '/exercises'));
+  app.use(connect.directory(__dirname + '/exercises'));
+
+  gutil.log('Starting WWW server at http://localhost:' + port);
+  http.createServer(app).listen(port);
 });

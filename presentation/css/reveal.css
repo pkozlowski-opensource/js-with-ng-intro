@@ -318,13 +318,13 @@ body {
 .reveal pre {
 	display: block;
 	position: relative;
-	width: 90%;
+	width: 100%;
 	margin: 15px auto;
 
 	text-align: left;
-	font-size: 0.55em;
+	font-size: 0.65em;
 	font-family: monospace;
-	line-height: 1.2em;
+	line-height: 1.3em;
 
 	word-wrap: break-word;
 
@@ -332,12 +332,12 @@ body {
 }
 .reveal code {
 	font-family: monospace;
-    font-size: 20px;
+    font-size: 22px;
 }
 .reveal pre code {
 	padding: 5px;
 	overflow: auto;
-	max-height: 400px;
+	max-height: 600px;
 	word-wrap: normal;
 }
 .reveal pre.stretch code {

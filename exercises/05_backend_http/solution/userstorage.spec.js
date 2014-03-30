@@ -41,7 +41,6 @@ describe('Async user storage', function () {
 
     it('should support adding new users', function () {
 
-      //ex:start
       $httpBackend.expectPOST(withUrl('')).respond(testUser);
 
       userStorage.save({
@@ -52,19 +51,16 @@ describe('Async user storage', function () {
 
       // time machine!
       $httpBackend.flush();
-      //ex:end
     });
 
     it('should update an existing user when save called on a user with a defined id', function () {
 
-      //ex:start
       $httpBackend.expectPUT(withUrl('/123')).respond(testUser);
 
       userStorage.save(testUser).then(function(savedUser){
         expect(savedUser._id.$oid).toEqual('123');
       }, onFail);
       $httpBackend.flush();
-      //ex:end
     });
 
     // slide:start:test;
@@ -82,7 +78,6 @@ describe('Async user storage', function () {
 
     it('should allow querying all users', function () {
 
-      //ex:start
       $httpBackend.expectGET(withUrl('')).respond([testUser]);
 
       userStorage.getAll().then(function(users) {
@@ -90,11 +85,10 @@ describe('Async user storage', function () {
       }, onFail);
 
       $httpBackend.flush();
-      //ex:end
     });
 
     it('should support removing users by id', function () {
-      //ex:start
+
       $httpBackend.expectDELETE(withUrl('/123')).respond(testUser);
 
       userStorage.remove('123').then(function(deletedUser) {
@@ -102,7 +96,6 @@ describe('Async user storage', function () {
       }, onFail);
 
       $httpBackend.flush();
-      //ex:end
     });
 
   });

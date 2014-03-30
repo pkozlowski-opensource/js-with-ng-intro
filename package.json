@@ -10,15 +10,16 @@
   },
   "devDependencies": {
     "gulp": "~3.5.6",
-    "connect": "~2.14.3",
     "gulp-util": "~2.2.14",
+    "gulp-template": "~0.1.1",
     "karma": "~0.12.1",
     "karma-jasmine": "~0.1.5",
     "karma-chrome-launcher": "~0.1.2",
-    "gulp-template": "~0.1.1",
+    "karma-ng-html2js-preprocessor": "~0.1.0",
+    "connect": "~2.14.3",
     "through2": "~0.4.1",
     "string": "~1.8.0",
-    "escape-html": "~1.0.1",
-    "lodash": "~2.4.1"
+    "lodash": "~2.4.1",
+    "gulp-jshint": "~1.5.1"
   }
 }
