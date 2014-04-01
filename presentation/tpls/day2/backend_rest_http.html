@@ -1,0 +1,47 @@
+<section>
+
+    <section>
+        <h2>Building your own persistence layer</h2>
+        <img src="http://abeautifulmess.typepad.com/.a/6a00d8358081ff69e20163007ca50d970d-800wi" alt=""/>
+    </section>
+
+    <section>
+        <h2>Potential problems with $resource</h2>
+        <ul>
+            <li>Limited control over URLs and HTTP verbs</li>
+            <li>Pre-defined response formats (especially for collections)</li>
+            <li>Promise support added as an afterthought</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Custom ngResource-like factory</h2>
+        <h3>It is (rather) easy to create a custom, $resource-like wrapper</h3>
+        <ul>
+            <li>Address $resource limitations</li>
+            <li>First-class promises support</li>
+            <li>Custom actions / methods</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>The ideal solution</h2>
+        <h4>Storage service</h4>
+        <pre><code ng-non-bindable=""><%= includeCode('exercises/08_backend_rest_http/solution/userstorage.js') %></code></pre>
+        <h4>Controller</h4>
+        <pre><code ng-non-bindable=""><%= includeCode('exercises/08_backend_rest_http/solution/users.js','getAll') %></code></pre>
+        <pre><code ng-non-bindable=""><%= includeCode('exercises/08_backend_rest_http/solution/users.js','save') %></code></pre>
+    </section>
+
+    <section>
+        <h2>Let's go over the implementation code together</h2>
+    </section>
+
+    <section>
+        <h1>Exercise</h1>
+        <h2 stopwatch="30"></h2>
+        <p>Inspect code of the custom MongoLab resource.</p>
+        <p>Use it from a controller.</p>
+    </section>
+
+</section>

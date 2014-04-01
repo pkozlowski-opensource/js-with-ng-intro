@@ -24,7 +24,6 @@
                 <section>
                     <h2>Building SPAs with AngularJS</h2>
                     <h3>Introduction and intermediate topics</h3>
-                    <p>Workshop prepared by Pawel Kozlowski</p>
 
                     <p>
                         <small>
@@ -71,6 +70,7 @@
                                 <li>Unit testing and TDD</li>
                             </ul>
                         </li>
+                        <li>Web applications where you want to use AngularJS</li>
                         <li>Your expectations regarding this workshop</li>
                     </ul>
                 </section>
@@ -93,11 +93,50 @@
         <ul>
             <li>Short ones at any time</li>
             <li>A dedicated slot for more involved topics</li>
+            <li>I'm here to address <i>your</i> concerns, not present <i>my</i> material</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Tools and libraries</h2>
+        <ul>
+            <li>Libraries: <ul>
+                <li><a href="http://angularjs.org" target="_blank">AngularJS</a></li>
+                <li><a href="http://jasmine.github.io/">Jasmine</a> - BDD testing framework</li>
+                <li><a href="http://momentjs.com/">moment.js</a> - date / time manipulation helper</li>
+                <li><a href="http://getbootstrap.com/">Bootstrap CSS</a> - so things look decent</li>
+            </ul></li>
+            <li>Tools: <ul>
+                <li><a href="http://www.nodejs.org/" target="_blank">node.js</a> / npm to run build and examples</li>
+                <li><a href="http://gulpjs.com/" target="_blank">Gulp.js</a> as the stream-based build tool</li>
+                <li><a href="http://karma-runner.github.io/0.12/index.html" target="_blank">Karma-runner</a> as a in-browser test runner</li>
+            </ul></li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Exercises and this presentation</h2>
+        <a href="https://github.com/pkozlowski-opensource/js-with-ng-intro">https://github.com/pkozlowski-opensource/js-with-ng-intro</a>
+    </section>
+
+    <section>
+        <h2>Working on exercises</h2>
+        <ul>
+            <li>All exercises are in the /exercises folder</li>
+            <li>You usually need to "fill in blanks"</li>
+            <li>A solution is always provided in the "solution" subfolder</li>
+            <li>Useful commands:
+                <ul>
+                    <li><code>gulp www</code> - start built-in web server</li>
+                    <li><code>gulp test</code> - run tests</li>
+                    <li><code>gulp tdd</code> - run tests on each code change</li>
+                </ul>
+            </li>
+            <li>I highly encourage you to pair-program during exercises</li>
         </ul>
     </section>
 
 </section>
-
                 <section>
 
     <section>
@@ -171,7 +210,6 @@
     </section>
 
 </section>
-
                 <section>
 
     <section>
@@ -180,6 +218,12 @@
 
     <section>
         <h2>From static web to... web applications!</h2>
+        <table>
+            <tr>
+                <td><img src="img/old_website.png" alt=""/></td>
+                <td><img src="img/new_website.png" alt=""/></td>
+            </tr>
+        </table>
     </section>
 
     <section>
@@ -195,17 +239,17 @@
                     <pre><code>var isIE = document.attachEvent;
 
 var addEventListener = isIE  ? function (e, t, fn) {
-  e.attachEvent(&#39;on&#39; + t, fn);
+  e.attachEvent(&apos;on&apos; + t, fn);
 } : function (e, t, fn) {
   e.addEventListener(t, fn, false);
 };
 
-addEventListener(document, &#39;load&#39;, function () {
-  var greeting = document.getElementById(&#39;greeting&#39;);
+addEventListener(document, &apos;load&apos;, function () {
+  var greeting = document.getElementById(&apos;greeting&apos;);
   if (isIE) {
-    greeting.innerText = &#39;Hello World!&#39;;
+    greeting.innerText = &apos;Hello World!&apos;;
   } else {
-    greeting.textContent = &#39;Hello World!&#39;;
+    greeting.textContent = &apos;Hello World!&apos;;
   }
 });</code></pre>
                 </td>
@@ -216,6 +260,20 @@ addEventListener(document, &#39;load&#39;, function () {
     <section>
         <h2>We need a superheroic framework!</h2>
         <img src="http://img.gawkerassets.com/img/18lshnw1rawjgjpg/ku-xlarge.jpg" alt=""/>
+    </section>
+
+    <section>
+        <h2>But we've got jQuery!</h2>
+        <ul class="list">
+            <li>Remedy for the DOM insanity</li>
+            <li>Focused on DOM querying and manipulation</li>
+            <li>The programming model didn't fundamentally change...</li>
+        </ul>
+<pre><code>
+$(function(){
+  $('#greeting').text('Hello World!');
+});
+</code></pre>
     </section>
 
     <section>
@@ -262,11 +320,10 @@ addEventListener(document, &#39;load&#39;, function () {
         <h1>Exercise</h1>
         <h2 stopwatch="40"></h2>
         <p>Make the user-management page live.</p>
-        <p>Check tests.</p>
+        <p>Check tests and make sure that they pass (let's setup the test env together!).</p>
     </section>
 
 </section>
-
                 <section>
 
     <section>
@@ -304,17 +361,17 @@ addEventListener(document, &#39;load&#39;, function () {
 
     <section>
         <h2>Values</h2>
-        <pre><code ng-non-bindable>angular.module(&#39;app&#39;, []).value(&#39;userstorage&#39;, new UserStorage());</code></pre>
+        <pre><code ng-non-bindable>angular.module(&apos;app&apos;, []).value(&apos;userstorage&apos;, new UserStorage());</code></pre>
     </section>
 
     <section>
         <h2>Services</h2>
-        <pre><code ng-non-bindable>angular.module(&#39;app&#39;, []).service(&#39;userstorage&#39;, UserStorage);</code></pre>
+        <pre><code ng-non-bindable>angular.module(&apos;app&apos;, []).service(&apos;userstorage&apos;, UserStorage);</code></pre>
     </section>
 
     <section>
         <h2>Factoriess</h2>
-        <pre><code ng-non-bindable>angular.module(&#39;app&#39;, []).service(&#39;factory&#39;, function(){
+        <pre><code ng-non-bindable>angular.module(&apos;app&apos;, []).service(&apos;factory&apos;, function(){
     return new UserStorage();
     // or simply define it here
   });</code></pre>
@@ -343,9 +400,9 @@ addEventListener(document, &#39;load&#39;, function () {
 
     <section>
         <h2>Constants</h2>
-        <pre><code ng-non-bindable>angular.module(&#39;userstorage&#39;, [])
-  .constant(&#39;SEQUENCE_START&#39;, 1)
-  .factory(&#39;UserStorage&#39;, function(SEQUENCE_START) {
+        <pre><code ng-non-bindable>angular.module(&apos;userstorage&apos;, [])
+  .constant(&apos;SEQUENCE_START&apos;, 1)
+  .factory(&apos;UserStorage&apos;, function(SEQUENCE_START) {
 
     // I can configure my service based on the constant
     var sequence = 1;
@@ -360,13 +417,13 @@ addEventListener(document, &#39;load&#39;, function () {
 
 // I can re-define a constant closer to my application module
 
-angular.module(&#39;app&#39;, [&#39;userstorage&#39;]).constant(&#39;SEQUENCE_START&#39;, 10);</code></pre>
+angular.module(&apos;app&apos;, [&apos;userstorage&apos;]).constant(&apos;SEQUENCE_START&apos;, 10);</code></pre>
     </section>
 
     <section>
         <h2>Providers</h2>
-        <pre><code ng-non-bindable>angular.module(&#39;userstorage&#39;, [])
-  .provider(&#39;UserStorage&#39;, function() {
+        <pre><code ng-non-bindable>angular.module(&apos;userstorage&apos;, [])
+  .provider(&apos;UserStorage&apos;, function() {
 
     var settings = {
       seqStart: 1
@@ -388,7 +445,7 @@ angular.module(&#39;app&#39;, [&#39;userstorage&#39;]).constant(&#39;SEQUENCE_ST
 
 // I can configure a provider before it gets instantiated
 
-angular.module(&#39;app&#39;, [&#39;userstorage&#39;], function(userstorageProvider) {
+angular.module(&apos;app&apos;, [&apos;userstorage&apos;], function(userstorageProvider) {
   userstorageProvider.setSequenceStart(10);
 });</code></pre>
     </section>
@@ -402,18 +459,18 @@ angular.module(&#39;app&#39;, [&#39;userstorage&#39;], function(userstorageProvi
 
     <section>
         <h2>Modules do not _not_ form namespaces!</h2>
-        <pre><code ng-non-bindable>angular.module(&#39;app&#39;, [&#39;foo&#39;, &#39;bar&#39;]);
+        <pre><code ng-non-bindable>angular.module(&apos;app&apos;, [&apos;foo&apos;, &apos;bar&apos;]);
 
-angular.module(&#39;foo&#39;, []).service(&#39;myService&#39;, FooService);
-angular.module(&#39;bar&#39;, []).service(&#39;myService&#39;, BarService);</code></pre>
+angular.module(&apos;foo&apos;, []).service(&apos;myService&apos;, FooService);
+angular.module(&apos;bar&apos;, []).service(&apos;myService&apos;, BarService);</code></pre>
         <h4>But they do prevent pollution of the global JS namespace.</h4>
     </section>
 
     <section>
         <h2>Registering controllers on modules</h2>
-        <pre><code ng-non-bindable>angular.module(&#39;users&#39;, [])
+        <pre><code ng-non-bindable>angular.module(&apos;users&apos;, [])
 
-  .controller(&#39;UsersCtrl&#39;, function ($scope, UserStorage) {
+  .controller(&apos;UsersCtrl&apos;, function ($scope, UserStorage) {
 
     $scope.cleanUser = {};
     $scope.users = UserStorage.getAll();
@@ -429,25 +486,31 @@ angular.module(&#39;bar&#39;, []).service(&#39;myService&#39;, BarService);</cod
 
     <section>
         <h2>AngularJS modules and testing</h2>
-        <pre><code ng-non-bindable>  beforeEach(module(&#39;users&#39;));
-  // let&#39;s load real dependencies so those are called if not mocked
-  beforeEach(module(&#39;userstorage&#39;));
-  beforeEach(inject(function (_$rootScope_, _$controller_, _UserStorage_) {
-    $scope = _$rootScope_;
-    // now it should be more obvious why we use underscores
-    $controller = _$controller_;
-    userStorage = _UserStorage_;
-  }));</code></pre>
+        <pre><code ng-non-bindable> beforeEach(module(&apos;users&apos;));
+ // let&apos;s load real dependencies so those are called if not mocked
+ beforeEach(module(&apos;userstorage&apos;));
+ beforeEach(inject(function (_$rootScope_, _$controller_, _UserStorage_) {
+   $scope = _$rootScope_;
+   // now it should be more obvious why we use underscores
+   $controller = _$controller_;
+   userStorage = _UserStorage_;
+ }));</code></pre>
+    </section>
+
+    <section>
+        <h2>Loading modules on demand</h2>
+        <h3>The bitter truth is that it is not supported...</h3>
     </section>
 
     <section>
         <h1>Exercise</h1>
         <h2 stopwatch="30"></h2>
         <p>Turn code from the previous exercise into its modular equivalent.</p>
+        <p>Check tests to see various mocking / spying techniques.</p>
+        <p>Make the tests pass.</p>
     </section>
 
 </section>
-
                 <section>
     <section>
         <h2>More on the rendering engine</h2>
@@ -460,6 +523,9 @@ angular.module(&#39;bar&#39;, []).service(&#39;myService&#39;, BarService);</cod
 <pre><code ng-non-bindable>
     {{user.birthDate | date:'YYYY-MM-dd'}}
 </code></pre>
+<pre><code ng-non-bindable>
+    {{date(user.birthDate, 'YYYY-MM-dd')}}
+</code></pre>
         <ul>
             <li>Global UI formatting / transforming functions</li>
             <li>Built-in filters: formatting and arrays filtering</li>
@@ -469,7 +535,7 @@ angular.module(&#39;bar&#39;, []).service(&#39;myService&#39;, BarService);</cod
 
     <section>
         <h2>Formatting filters</h2>
-<pre><code ng-non-bindable>        &lt;td&gt;{{user.birthDate | date:&#39;YYYY-MM-dd&#39;}}&lt;/td&gt;</code></pre>
+<pre><code ng-non-bindable> &lt;td&gt;{{user.birthDate | date:&apos;YYYY-MM-dd&apos;}}&lt;/td&gt;</code></pre>
         <h4>Examples of built-in formatting filters:</h4>
         <ul>
             <li>currency</li>
@@ -482,10 +548,10 @@ angular.module(&#39;bar&#39;, []).service(&#39;myService&#39;, BarService);</cod
 
     <section>
         <h2>Filtering filters</h2>
-<pre><code ng-non-bindable>    &lt;tr ng-repeat=&quot;user in users | filter:filterCriteria | limitTo:20&quot;&gt;
-        &lt;td&gt;{{user.id}}&lt;/td&gt;
-        &lt;td&gt;{{user.login}}&lt;/td&gt;
-        &lt;td&gt;{{user.name}}&lt;/td&gt;</code></pre>
+<pre><code ng-non-bindable> &lt;tr ng-repeat=&quot;user in users | filter:filterCriteria | limitTo:20&quot;&gt;
+     &lt;td&gt;{{user.id}}&lt;/td&gt;
+     &lt;td&gt;{{user.login}}&lt;/td&gt;
+     &lt;td&gt;{{user.name}}&lt;/td&gt;</code></pre>
         <h4>Examples of built-in formatting filters:</h4>
         <ul>
             <li>filter</li>
@@ -530,7 +596,6 @@ angular.module('myDate', [])
     </section>
 
 </section>
-
                 <section>
     <section>
         <h2>Talking to a back-end</h2>
@@ -543,13 +608,14 @@ angular.module('myDate', [])
         <a target="_blank" href="https://support.mongolab.com/entries/20433053-Is-there-a-REST-API-for-MongoDB-">REST MongoDB API in the cloud</a><br>
     </section>
 
+
     <section>
         <h2>$http service</h2>
-        <pre><code ng-non-bindable>      return $http.get(BASE_URL, {params: {
-        apiKey: API_KEY
-      }}).then(function(response) {
-        return response.data;
-      });</code></pre>
+        <pre><code ng-non-bindable> return $http.get(BASE_URL, {params: {
+   apiKey: API_KEY
+ }}).then(function(response) {
+   return response.data;
+ });</code></pre>
     </section>
 
     <section>
@@ -558,12 +624,11 @@ angular.module('myDate', [])
     </section>
 
     <section>
-        <h2>We need better tools to work in the asynchronous World</h2>
+        <h2>We need better abstractions to work in the asynchronous World</h2>
         <ul>
             <ul>
                 <li>When the $http method call ends, results are not ready</li>
                 <li>When an error occurs there is no-one to catch it</li>
-                <li>Chaining calls becomes difficult (callback hell)</li>
             </ul>
         </ul>
     </section>
@@ -578,31 +643,26 @@ angular.module('myDate', [])
 
     <section>
         <h2>Callbacks are not cool</h2>
-        <img src="http://www.qlanguage.com.hk/wp-content/uploads/2013/09/it-stinks-300x300.jpg">
+        <img src="http://www.qlanguage.com.hk/wp-content/uploads/2013/09/it-stinks-300x300.jpg"><br/>
+        <ul>
+            <li>Chained calls ("callbacks hell")</li>
+            <li>Error handling</li>
+            <li>Parallel calls</li>
+        </ul>
     </section>
 
     <section>
         <h2>$http with the promise APi</h2>
         <h4>Service</h4>
-        <pre><code ng-non-bindable>      return $http.get(BASE_URL, {params: {
-        apiKey: API_KEY
-      }}).then(function(response) {
-        return response.data;
-      });</code></pre>
+        <pre><code ng-non-bindable> return $http.get(BASE_URL, {params: {
+   apiKey: API_KEY
+ }}).then(function(response) {
+   return response.data;
+ });</code></pre>
         <h4>Controller</h4>
-        <pre><code ng-non-bindable>      UserStorage.getAll().then(function (users) {
-        $scope.users = users;
-      });</code></pre>
-    </section>
-
-    <section>
-        <h1>Exercise</h1>
-        <h2 stopwatch="30"></h2>
-        <p>Change the UserStorage service to work with the MongoLab REST API.</p>
-    </section>
-
-    <section>
-        <h2>Bonus: testing</h2>
+        <pre><code ng-non-bindable> UserStorage.getAll().then(function (users) {
+   $scope.users = users;
+ });</code></pre>
     </section>
 
     <section>
@@ -612,30 +672,38 @@ angular.module('myDate', [])
 
     <section>
         <h2>Testing interactions with $http</h2>
-        <pre><code ng-non-bindable>    it(&#39;should support querying users by id&#39;, function () {
+        <pre><code ng-non-bindable> it(&apos;should support querying users by id&apos;, function () {
 
-      $httpBackend.expectGET(withUrl(&#39;/123&#39;)).respond(testUser);
+   $httpBackend.expectGET(withUrl(&apos;/123&apos;)).respond(testUser);
 
-      userStorage.getById(&#39;123&#39;).then(function(userById) {
-          expect(userById._id.$oid).toEqual(&#39;123&#39;);
-        }, onFail);
+   userStorage.getById(&apos;123&apos;).then(function(userById) {
+       expect(userById._id.$oid).toEqual(&apos;123&apos;);
+     }, onFail);
 
-      $httpBackend.flush();
-    });</code></pre>
-        <pre><code ng-non-bindable>  afterEach(function() {
-    $httpBackend.verifyNoOutstandingExpectation();
-    $httpBackend.verifyNoOutstandingRequest();
-  });</code></pre>
+   $httpBackend.flush();
+ });</code></pre>
+        <pre><code ng-non-bindable> afterEach(function() {
+   $httpBackend.verifyNoOutstandingExpectation();
+   $httpBackend.verifyNoOutstandingRequest();
+ });</code></pre>
     </section>
 
     <section>
         <h2>2 ways of expressing expectations</h2>
         <h3>Code oriented vs. back-end oriented</h3>
         <a href="http://docs.angularjs.org/api/ngMock.$httpBackend" target="_blank">expect vs. when</a>
+        <p>(or application-focused vs. backend-focused)</p>
     </section>
 
-</section>
+    <section>
+        <h1>Exercise</h1>
+        <h2 stopwatch="30"></h2>
+        <p>Change the UserStorage service to work with the MongoLab REST API.</p>
+        <p>Check tests and make them pass.</p>
+    </section>
 
+
+</section>
                 <section>
     <section>
         <h2>Promises with $q</h2>
@@ -667,44 +735,40 @@ angular.module('myDate', [])
 
     <section>
         <h2>Promises in AngularJS</h2>
-        <ul>
-            <li>
-                The $q service based on Kris Kowal's q library
-                <a href="https://github.com/kriskowal/q">https://github.com/kriskowal/q</a>
-            </li>
-        </ul>
+        <p>The $q service based on Kris Kowal's q library</p>
+        <a href="https://github.com/kriskowal/q">https://github.com/kriskowal/q</a>
     </section>
 
     <section>
         <h2>Let's see some code</h2>
-        <pre><code ng-non-bindable>  var Person = function (name, $log) {
+        <pre><code ng-non-bindable> var Person = function (name, $log) {
 
-    this.eat = function (food) {
-      $log.info(name + &quot; is eating delicious &quot; + food);
-    };
-    this.beHungry = function (reason) {
-      $log.warn(name + &quot; is hungry because: &quot; + reason);
-    };
-  };</code></pre>
+   this.eat = function (food) {
+     $log.info(name + &quot; is eating delicious &quot; + food);
+   };
+   this.beHungry = function (reason) {
+     $log.warn(name + &quot; is hungry because: &quot; + reason);
+   };
+ };</code></pre>
     </section>
 
     <section>
         <h2>Basic usage scenario</h2>
-        <pre><code ng-non-bindable>      it(&#39;should illustrate basic usage of $q&#39;, function () {
+        <pre><code ng-non-bindable> it(&apos;should illustrate basic usage of $q&apos;, function () {
 
-        //deferred represents a task that will complete (or fail) in the future
-        var pizzaOrderFulfillment = $q.defer();
+   //deferred represents a task that will complete (or fail) in the future
+   var pizzaOrderFulfillment = $q.defer();
 
-        //the task in the future comes with a promise of task completion (or failure)
-        var pizzaDelivered = pizzaOrderFulfillment.promise;
+   //the task in the future comes with a promise of task completion (or failure)
+   var pizzaDelivered = pizzaOrderFulfillment.promise;
 
-        pizzaDelivered.then(pawel.eat, pawel.beHungry);
+   pizzaDelivered.then(pawel.eat, pawel.beHungry);
 
-        pizzaOrderFulfillment.resolve(&#39;Margherita&#39;);
-        $rootScope.$digest();
+   pizzaOrderFulfillment.resolve(&apos;Margherita&apos;);
+   $rootScope.$digest();
 
-        expect($log.info.logs).toContain([&#39;Pawel is eating delicious Margherita&#39;]);
-      });</code></pre>
+   expect($log.info.logs).toContain([&apos;Pawel is eating delicious Margherita&apos;]);
+ });</code></pre>
     </section>
 
     <section>
@@ -713,105 +777,105 @@ angular.module('myDate', [])
             <li>I control the future (.resolve, .reject)</li>
             <li>I depend on future results (.then)</li>
         </ul>
-        <pre><code ng-non-bindable>      it(&#39;should illustrate promise resolution in a service&#39;, function () {
+        <pre><code ng-non-bindable> it(&apos;should illustrate promise resolution in a service&apos;, function () {
 
-        var pizzaDelivered = pizzaPit.takeOrder(&#39;Margherita&#39;);
-        pizzaDelivered.then(pawel.eat, pawel.beHungry);
+   var pizzaDelivered = pizzaPit.takeOrder(&apos;Margherita&apos;);
+   pizzaDelivered.then(pawel.eat, pawel.beHungry);
 
-        pizzaPit.deliverOrder();
+   pizzaPit.deliverOrder();
 
-        expect($log.info.logs).toContain([&#39;Pawel is eating delicious Margherita&#39;]);
-      });</code></pre>
-        <pre><code ng-non-bindable>      try {
-        pawel.eat(pizzaPit.takeOrder(&#39;Margherita&#39;));
-      } catch (e) {
-        pawel.beHungry(e.msg);
-      }</code></pre>
+   expect($log.info.logs).toContain([&apos;Pawel is eating delicious Margherita&apos;]);
+ });</code></pre>
+        <pre><code ng-non-bindable> try {
+   pawel.eat(pizzaPit.takeOrder(&apos;Margherita&apos;));
+ } catch (e) {
+   pawel.beHungry(e.msg);
+ }</code></pre>
     </section>
 
     <section>
         <h2>Callback aggregation</h2>
-        <pre><code ng-non-bindable>      it(&#39;should allow callbacks aggregation&#39;, function () {
-        var pizzaDelivered = pizzaPit.takeOrder(&#39;Margherita&#39;);
-        pizzaDelivered.then(pawel.eat, pawel.beHungry);
-        pizzaDelivered.then(pete.eat, pete.beHungry);
+        <pre><code ng-non-bindable> it(&apos;should allow callbacks aggregation&apos;, function () {
+   var pizzaDelivered = pizzaPit.takeOrder(&apos;Margherita&apos;);
+   pizzaDelivered.then(pawel.eat, pawel.beHungry);
+   pizzaDelivered.then(pete.eat, pete.beHungry);
 
-        pizzaPit.deliverOrder();
-        expect($log.info.logs).toContain([&#39;Pawel is eating delicious Margherita&#39;]);
-        expect($log.info.logs).toContain([&#39;Peter is eating delicious Margherita&#39;]);
-      });</code></pre>
-        <pre><code ng-non-bindable>      try {
-        var pizza = pizzaPit.takeOrder(&#39;Margherita&#39;);
-        pawel.eat(pizza);
-        pete.eat(pizza);
-      } catch (e) {
-        pawel.beHungry(e.msg);
-        pete.beHungry(e.msg);
-      }</code></pre>
+   pizzaPit.deliverOrder();
+   expect($log.info.logs).toContain([&apos;Pawel is eating delicious Margherita&apos;]);
+   expect($log.info.logs).toContain([&apos;Peter is eating delicious Margherita&apos;]);
+ });</code></pre>
+        <pre><code ng-non-bindable> try {
+   var pizza = pizzaPit.takeOrder(&apos;Margherita&apos;);
+   pawel.eat(pizza);
+   pete.eat(pizza);
+ } catch (e) {
+   pawel.beHungry(e.msg);
+   pete.beHungry(e.msg);
+ }</code></pre>
     </section>
 
     <section>
         <h2>Promise chaining</h2>
-        <pre><code ng-non-bindable>      it(&#39;should illustrate successful promise chaining&#39;, function () {
+        <pre><code ng-non-bindable> it(&apos;should illustrate successful promise chaining&apos;, function () {
 
-        var slice = function(pizza) {
-          return &quot;sliced &quot;+pizza;
-        };
+   var slice = function(pizza) {
+     return &quot;sliced &quot;+pizza;
+   };
 
-        pizzaPit
-          .takeOrder(&#39;Margherita&#39;)
-          .then(slice)
-          .then(pawel.eat, pawel.beHungry);
+   pizzaPit
+     .takeOrder(&apos;Margherita&apos;)
+     .then(slice)
+     .then(pawel.eat, pawel.beHungry);
 
-        pizzaPit.deliverOrder();
-        expect($log.info.logs).toContain([&#39;Pawel is eating delicious sliced Margherita&#39;]);
-      });</code></pre>
-        <pre><code ng-non-bindable>      try {
-        pawel.eat(slice(pizzaPit.takeOrder(&#39;Margherita&#39;)));
-      } catch (e) {
-        pawel.beHungry(e.msg);
-      }</code></pre>
+   pizzaPit.deliverOrder();
+   expect($log.info.logs).toContain([&apos;Pawel is eating delicious sliced Margherita&apos;]);
+ });</code></pre>
+        <pre><code ng-non-bindable> try {
+   pawel.eat(slice(pizzaPit.takeOrder(&apos;Margherita&apos;)));
+ } catch (e) {
+   pawel.beHungry(e.msg);
+ }</code></pre>
     </section>
 
     <section>
         <h2>Error recovery</h2>
-        <pre><code ng-non-bindable>      it(&#39;should illustrate recovery from promise rejection&#39;, function () {
+        <pre><code ng-non-bindable> it(&apos;should illustrate recovery from promise rejection&apos;, function () {
 
-        var retry = function(reason) {
-          return pizzaPit.takeOrder(&#39;Margherita&#39;).then(slice);
-        };
-        pizzaPit.takeOrder(&#39;Capricciosa&#39;).then(slice, retry).then(pawel.eat, pawel.beHungry);
+   var retry = function(reason) {
+     return pizzaPit.takeOrder(&apos;Margherita&apos;).then(slice);
+   };
+   pizzaPit.takeOrder(&apos;Capricciosa&apos;).then(slice, retry).then(pawel.eat, pawel.beHungry);
 
-        pizzaPit.problemWithOrder(&#39;no Capricciosa, only Margherita left&#39;);
-        pizzaPit.deliverOrder();
+   pizzaPit.problemWithOrder(&apos;no Capricciosa, only Margherita left&apos;);
+   pizzaPit.deliverOrder();
 
-        expect($log.info.logs).toContain([&#39;Pawel is eating delicious sliced Margherita&#39;]);
-      });</code></pre>
-        <pre><code ng-non-bindable>      try {
-        pawel.eat(pizzaPit.takeOrder(&#39;Capricciosa&#39;));
-      } catch (e) {
-        pawel.eat(pizzaPit.takeOrder(&#39;Margherita&#39;));
-      }</code></pre>
+   expect($log.info.logs).toContain([&apos;Pawel is eating delicious sliced Margherita&apos;]);
+ });</code></pre>
+        <pre><code ng-non-bindable> try {
+   pawel.eat(pizzaPit.takeOrder(&apos;Capricciosa&apos;));
+ } catch (e) {
+   pawel.eat(pizzaPit.takeOrder(&apos;Margherita&apos;));
+ }</code></pre>
     </section>
 
     <section>
         <h2>Explicit rejection</h2>
-        <pre><code ng-non-bindable>      it(&#39;should illustrate explicit rejection in chain&#39;, function () {
+        <pre><code ng-non-bindable> it(&apos;should illustrate explicit rejection in chain&apos;, function () {
 
-        var explain = function(reason) {
-          return $q.reject(&#39;ordered pizza not available&#39;);
-        };
+   var explain = function(reason) {
+     return $q.reject(&apos;ordered pizza not available&apos;);
+   };
 
-        pizzaPit.takeOrder(&#39;Capricciosa&#39;).then(slice, explain).then(pawel.eat, pawel.beHungry);
-        pizzaPit.problemWithOrder(&#39;no Capricciosa, only Margherita left&#39;);
+   pizzaPit.takeOrder(&apos;Capricciosa&apos;).then(slice, explain).then(pawel.eat, pawel.beHungry);
+   pizzaPit.problemWithOrder(&apos;no Capricciosa, only Margherita left&apos;);
 
-        expect($log.warn.logs).toContain([&#39;Pawel is hungry because: ordered pizza not available&#39;]);
-      });</code></pre>
-        <pre><code ng-non-bindable>      try {
-        pawel.eat(pizzaPit.takeOrder(&#39;Capricciosa&#39;));
-      } catch (e) {
-        throw new Exception(&#39;ordered pizza not available&#39;);
-      }</code></pre>
+   expect($log.warn.logs).toContain([&apos;Pawel is hungry because: ordered pizza not available&apos;]);
+ });</code></pre>
+        <pre><code ng-non-bindable> try {
+   pawel.eat(pizzaPit.takeOrder(&apos;Capricciosa&apos;));
+ } catch (e) {
+   throw new Exception(&apos;ordered pizza not available&apos;);
+ }</code></pre>
     </section>
 
     <section>
@@ -825,6 +889,549 @@ angular.module('myDate', [])
 
 </section>
 
+
+                <section>
+
+    <section>
+        <h2>Working with RESTful endpoints</h2>
+
+        <h3>or DRY-ing $http interactions</h3>
+        <img src="http://petewarden.files.wordpress.com/2008/04/987da-rascallyrepeatingrabbits.png" alt=""/>
+    </section>
+
+    <section>
+        <h2>Code interacting with RESTful APIs gets very repetitive</h2>
+        <ul>
+            <li>Similar URLs</li>
+            <li>A fixed set of actions and HTTP verbs</li>
+            <li>Similar data serializing / parsing</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>AngularJS has 2 solutions</h2>
+        <ul>
+            <li>ngResource</li>
+            <li>custom abstraction over $http</li>
+        </ul>
+    </section>
+
+    <section>
+        <h1>ngResource</h1>
+    </section>
+
+    <section>
+        <h2>ngResource philosophy</h2>
+        <ul>
+            <li>Generic - aims to work with <i>any</i> REST backend</li>
+            <li>Opinionated:
+                <ul>
+                    <li>all the URLs need to follow a certain pattern</li>
+                    <li>CRUD operation names and their mapping to HTTP verbs</li>
+                    <li>pre-defined response format</li>
+                </ul>
+            </li>
+            <li>Table Data Gateway and Active Record patterns</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Show me the code!</h2>
+        <pre><code ng-non-bindable=""> var User = $resource(&apos;https://api.mongolab.com/api/1/databases/&apos; + MONGOLAB_CONFIG.DB_NAME + &apos;/collections/users/:id&apos;,
+   {
+     apiKey: MONGOLAB_CONFIG.API_KEY,
+     id: &apos;@_id.$oid&apos;
+   }, {
+     update: {
+       method: &apos;PUT&apos;,
+       transformRequest: function (data) {
+         return JSON.stringify(angular.extend({}, data, {_id: undefined}));
+       }
+     }
+   });</code></pre>
+        <h4>More generally:</h4>
+<pre><code ng-non-bindable="">
+    ResourceClass = $resource('http://some/urls/with/:param1?other=:param2',
+        { param1: '@id', param2: 'some fixed value'},
+        { // custom actions go here});
+</code></pre>
+    </section>
+
+    <section>
+        <h2>$resource returns a constructor</h2>
+        <pre><code ng-non-bindable="">
+            var User = $resource('http://...', {...}, {...});
+
+            //get all users
+            User.query({}, function(users){
+                //do something with users here...
+            });
+
+            //create and save a user
+            var user = new User({name: 'Peter'});
+            user.$save();
+
+
+            //later on we can delete it
+            user.$remove();
+        </code></pre>
+    </section>
+
+
+    <section>
+        <h2>Methods generated in a new resource "class"</h2>
+        <ul>
+            <li>"Class" methods:
+                <ul>
+                    <li><code>User.get</code> (GET, object)</li>
+                    <li><code>User.query</code> (GET, array)</li>
+                    <li><code>User.save</code> (POST, object)</li>
+                    <li><code>User.remove</code> (DELETE, object)</li>
+                </ul>
+            </li>
+            <li>"Instance" methods:
+                <ul>
+                    <li><code>user.$save</code> (POST, object)</li>
+                    <li><code>user.$remove</code> (DELETE, object)</li>
+                </ul>
+            </li>
+            <li>There is no default <code>update</code> method!</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Usage scenarios - instance methods</h2>
+        <pre><code ng-non-bindable=""> $scope.remove = function (user) {
+   user.$remove(function() {
+     refreshUsersList();
+   });
+ };</code></pre>
+    </section>
+
+    <section>
+        <h2>Usage scenarios - class methods</h2>
+<pre><code ng-non-bindable="">
+    function refreshUsersList() {
+        $scope.users = User.query({});
+        console.log($scope.users[0]);
+    }
+</code></pre>
+        <h3>Is it synchronous??? Nope...</h3>
+<pre><code ng-non-bindable="">
+    function refreshUsersList() {
+        User.query({}, function(users) {
+            $scope.users = users;
+            console.log($scope.users[0]);
+        });
+    }
+</code></pre>
+    </section>
+
+    <section>
+        <h1>Exercise</h1>
+        <h2 stopwatch="30"></h2>
+        <p>Create the <code>User</code> resource and use it from a controller</p>
+    </section>
+
+</section>
+                <section>
+
+    <section>
+        <h2>Building your own persistence layer</h2>
+        <img src="http://abeautifulmess.typepad.com/.a/6a00d8358081ff69e20163007ca50d970d-800wi" alt=""/>
+    </section>
+
+    <section>
+        <h2>Potential problems with $resource</h2>
+        <ul>
+            <li>Limited control over URLs and HTTP verbs</li>
+            <li>Pre-defined response formats (especially for collections)</li>
+            <li>Promise support added as an afterthought</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Custom ngResource-like factory</h2>
+        <h3>It is (rather) easy to create a custom, $resource-like wrapper</h3>
+        <ul>
+            <li>Address $resource limitations</li>
+            <li>First-class promises support</li>
+            <li>Custom actions / methods</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>The ideal solution</h2>
+        <h4>Storage service</h4>
+        <pre><code ng-non-bindable="">angular.module(&apos;userstorageHttpResource&apos;, [&apos;mongolab&apos;])
+  .factory(&apos;User&apos;, function ($mongolabResource) {
+
+    return $mongolabResource(&apos;users&apos;);
+  });</code></pre>
+        <h4>Controller</h4>
+        <pre><code ng-non-bindable=""> function refreshUsersList() {
+   User.getAll().then(function (users) {
+     $scope.users = users;
+   });
+ }</code></pre>
+        <pre><code ng-non-bindable=""> $scope.save = function () {
+   $scope.user.$save().then(function () {
+     $scope.cleanUser = new User({});
+     $scope.clear();
+     refreshUsersList();
+   });
+ };</code></pre>
+    </section>
+
+    <section>
+        <h2>Let's go over the implementation code together</h2>
+    </section>
+
+    <section>
+        <h1>Exercise</h1>
+        <h2 stopwatch="30"></h2>
+        <p>Inspect code of the custom MongoLab resource.</p>
+        <p>Use it from a controller.</p>
+    </section>
+
+</section>
+                <section>
+
+    <section>
+        <h1>URLs and navigation</h1>
+        <img src="http://cdn0.tnwcdn.com/wp-content/blogs.dir/1/files/2013/10/URL.jpg" alt=""/>
+    </section>
+
+    <section>
+        <h2>It all started good...</h2>
+        <h2>with a URL pointing to _one_ resource on a server...</h2>
+        <a>http://www.hotnews.com/sport/football.html</a>
+    </section>
+
+    <section>
+        <h2>Dynamic sites have broken URL model...</h2>
+        <h3>and back / forward buttons...</h3>
+        <h4>and refresh...</h4>
+        <a>http://www.hotnews.com/sport.asp?category=football</a>
+    </section>
+
+    <section>
+        <h2>AJAX made the situation only worse...</h2>
+        <h3>or have broken things differently...</h3>
+        <a>http://www.hotnews.com/sport.html#football</a>
+    </section>
+
+    <section>
+        <h2>Basic problem:</h2>
+        <h3>there is _one_ URL to denote current _state_ of an application</h3>
+        <ul>
+            <li>How to re-create application's state based on the URL?</li>
+            <li>How to change the URL in response to application's state changes?</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Ideally we would like to have "clean" URLs (HTML5 mode):</h2>
+        <ul>
+            <li><a>http://myapp.com/users/list</a></li>
+            <li><a>http://myapp.com/users/new</a></li>
+            <li><a>http://myapp.com/users/edit/[userid]</a></li>
+        </ul>
+        <p>without making round-trips to the server...</p>
+        <p>and still make URLs "bookmarkable"</p>
+    </section>
+
+    <section>
+        <h2>But we might need to stick to the "hashbang" mode</h2>
+        <ul>
+            <li><a>http://myapp.com#/users/list</a></li>
+            <li><a>http://myapp.com#/users/new</a></li>
+            <li><a>http://myapp.com#/users/edit/[userid]</a></li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>AngularJS makes it easy to work with "client-side" URLs</h2>
+        <h3>The $location service</h3>
+        <ul>
+            <li><a href="">http://myapp.com/#/users/list?sort=name#top</a></li>
+            <li><a href="">http://myapp.com/users/list?sort=name#top</a></li>
+        </ul>
+        <hr/>
+        <table width="80%" border="1">
+            <tr>
+                <th></th>
+                <th>HTML5</th>
+                <th>Hashbang</th>
+            </tr>
+            <tr>
+                <td>$location.path()</td>
+                <td>/users/list</td>
+                <td>/users/list</td>
+            </tr>
+            <tr>
+                <td>$location.search().sort</td>
+                <td>name</td>
+                <td>name</td>
+            </tr>
+            <tr>
+                <td>$location.hash()</td>
+                <td>top</td>
+                <td>top</td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <h2>We <i>could</i> build a navigation system based on the $location + ngInclude primtives...</h2>
+    </section>
+
+    <section>
+        <h1>Routing</h1>
+        <img src="http://upload.wikimedia.org/wikipedia/commons/d/d3/Viaduct_in_Puxi,_Shanghai.jpg" alt=""/>
+    </section>
+
+    <section>
+        <h2>$routeProvider</h2>
+        <pre><code ng-non-bindable=""> angular.module(&apos;app&apos;, [&apos;ngRoute&apos;, &apos;usersNgRoute&apos;])
+         .constant(&apos;MONGOLAB_CONFIG&apos;, {
+             API_KEY: &apos;4fb51e55e4b02e56a67b0b66&apos;,
+             DB_NAME: &apos;roche&apos;
+         })
+         .config(function ($routeProvider) {
+
+             $routeProvider.when(&apos;/users/list&apos;, {
+                 templateUrl: &apos;list.html&apos;
+             })
+
+             .when(&apos;/users/edit/new&apos;, {
+                 templateUrl: &apos;edit.html&apos;
+             })
+
+             .when(&apos;/users/edit/:id&apos;, {
+                 templateUrl: &apos;edit.html&apos;
+             })
+
+             .otherwise({
+                 redirectTo: &apos;/users/list&apos;
+             });
+         });</code></pre>
+    </section>
+
+    <section>
+        <h2>Route's content gets included using ngView</h2>
+        <pre><code ng-non-bindable=""><div ng-view></div></code></pre>
+    </section>
+
+    <section>
+        <h2>Advantages</h2>
+        <ul>
+            <li>Structures the whole application</li>
+            <li>Makes it easy to split HTML / JS into smaller chunks</li>
+            <li>Handles URL parsing</li>
+            <li>Handles transitions in response to $location changes</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Let's see the live example and some more code</h2>
+    </section>
+
+    <section>
+        <h1>Exercise</h1>
+        <h2 stopwatch="40"></h2>
+        <p>Introduce routing to our demo application.</p>
+    </section>
+
+    <section>
+        <h2>It is all good, but...</h2>
+        <img src="http://i.stack.imgur.com/HxEa3.jpg" alt=""/>
+    </section>
+
+    <section>
+        <h2>We need to synchronize data retrieval with view changes</h2>
+    </section>
+
+    <section>
+        <h2>Promise API to the rescue</h2>
+        <pre><code ng-non-bindable=""> $routeProvider.when(&apos;/users/list&apos;, {
+     templateUrl: &apos;list.html&apos;,
+     controller: &apos;UsersListCtrl&apos;,
+     resolve: {
+         users: function(User) {
+             //if we return a promise, route change will be
+             //suspended until a promise is resolved
+             return User.getAll();
+         }
+     }
+ });</code></pre>
+    </section>
+
+    <section>
+        <h2>On top of this we can now <i>inject</i> data to a controller</h2>
+        <pre><code ng-non-bindable=""> .controller(&apos;UsersListCtrl&apos;, function ($scope, $location, User, users) {
+
+   $scope.users = users;
+   
+   $scope.edit = function (user) {
+     $location.path(&apos;/users/edit/&apos; + user.getId());
+   };</code></pre>
+        <p>making a controller easier to test</p>
+    </section>
+
+    <section>
+        <h2>Let's see the live example and some more code</h2>
+    </section>
+
+    <section>
+        <h1>Exercise</h1>
+        <h2 stopwatch="30"></h2>
+        <p>Introduce resolves into routing.</p>
+    </section>
+
+    <section>
+        <h2>$routeProvider limitations</h2>
+        <h3>There is only one "hole" to fill in (ngView)</h3>
+    </section>
+
+    <section>
+        <h2>UI-router and alternative solutions</h2>
+        <ul>
+            <li><a href="http://angular-ui.github.io/ui-router/site/" target="_blank">ui-router</a> - community driven alternative</li>
+            <li>Routing system pending re-design in AngularJS 2.0</li>
+        </ul>
+    </section>
+
+</section>
+                <section>
+    <section>
+        <h2>Internationalization</h2>
+        <img src="http://blog.lionbridge.com/translation/files/2013/07/International-Trade.jpg" alt=""/>
+    </section>
+
+    <section>
+        <h2>2 main aspects of i18n</h2>
+        <ul>
+            <li>Regional settings (date, number format, currency symbols etc.)</li>
+            <li>Translations (templates, error messages etc.)</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Determining / switching locale</h2>
+        <ul>
+            <li>Include a "proper" file</li>
+            <li>Declare a dependency on the ngLocale module (rather "static" method)</li>
+            <li>en-us is a default locale if none included</li>
+        </ul>
+        <pre><code ng-non-bindable="">&lt;head&gt;
+    &lt;script src=&quot;../../lib/angular.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;../../lib/angular-locale_pl-pl.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;i18n.js&quot;&gt;&lt;/script&gt;
+    &lt;script&gt;
+        angular.module(&apos;app&apos;, [&apos;ngLocale&apos;, &apos;i18n&apos;]);
+    &lt;/script&gt;
+&lt;/head&gt;</code></pre>
+    </section>
+
+    <section>
+        <h2>The $locale module</h2>
+        <ul>
+            <li>$locale.id is the only public API</li>
+            <li>more interesting settings extracted from the closure library</li>
+            <li>additional settings can be used in custom directives / filters</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Built-in filters take $locale into account</h2>
+        <ul>
+            <li>date - named date formats</li>
+            <li>number - number format</li>
+            <li>currency - this one is dangerous, probably better not to use it</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Named date formats</h2>
+        <pre><code ng-non-bindable=""><div>Now: {{now | date:'fullDate'}}</div></code></pre>
+    </section>
+
+    <section>
+        <h2>Translations</h2>
+        <ul>
+            <li>Templates</li>
+            <li>JavaScript-driven content (error messages etc.)</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Translating templates</h2>
+        <ul>
+            <li>Client-side</li>
+            <li>Server-side</li>
+            <li>In any case we need to have: <code>f(key, locale) => translation</code></li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Handling translations client-side - filters</h2>
+        <pre><code ng-non-bindable=""><label for="name">{{ 'label.name' | i18n}}: </label></code></pre>
+        <pre><code ng-non-bindable="">
+.filter('i18n', function ($locale, TRANSLATIONS) {
+    return function (input) {
+        if (!angular.isString(input)) {
+            return input;
+         }
+         return TRANSLATIONS[$locale.id][input] || '?' + input + '?';
+    };
+});
+        </code></pre>
+        <p>An "obvious" choice.. that doesn't scale...</p>
+    </section>
+
+    <section>
+        <h2>Handling translations client-side - directives</h2>
+        <pre><code ng-non-bindable=""><label i18n="'label.name'"></label></code></pre>
+        <p>This doesn't work either:</p>
+        <ul>
+            <li>Hard to combine translated / non-translated strings</li>
+            <li>Can't be used to translate strings in attributes</li>
+        </ul>
+        <pre><code ng-non-bindable=""><input type="text" placeholder="Name"></code></pre>
+    </section>
+
+    <section>
+        <h2>angular-translate</h2>
+        <a href="http://angular-translate.github.io/" target="_blank">angular-translate</a>
+        <p>The most popular library based on the filter / directive idea</p>
+    </section>
+
+    <section>
+        <h2>Handling translations server-side</h2>
+        <h3>Basic idea:</h3>
+        <ul>
+            <li>Use build-time templates translation</li>
+            <li>Generate a set of templates for each locale</li>
+            <li>Pre-load templates bundle</li>
+        </ul>
+        <br/>
+        <p>This is a preferred method, but requires a bit of up-front build setup.</p>
+        <p>It also make it hard to switch locale on the fly</p>
+    </section>
+
+    <section>
+        <h1>Exercise</h1>
+        <h2 stopwatch="15"></h2>
+        <p>Include alternative locale (pl-pl) in the simple test page and observe its effect on various filters.</p>
+    </section>
+
+</section>
+
+                <section>
+                    <h1>That's all!</h1>
+                    <h3>Thank you for having me.</h3>
+                </section>
 
             </div>
 		</div>

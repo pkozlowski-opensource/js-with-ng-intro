@@ -1,0 +1,129 @@
+<section>
+
+    <section>
+        <h2>Working with RESTful endpoints</h2>
+
+        <h3>or DRY-ing $http interactions</h3>
+        <img src="http://petewarden.files.wordpress.com/2008/04/987da-rascallyrepeatingrabbits.png" alt=""/>
+    </section>
+
+    <section>
+        <h2>Code interacting with RESTful APIs gets very repetitive</h2>
+        <ul>
+            <li>Similar URLs</li>
+            <li>A fixed set of actions and HTTP verbs</li>
+            <li>Similar data serializing / parsing</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>AngularJS has 2 solutions</h2>
+        <ul>
+            <li>ngResource</li>
+            <li>custom abstraction over $http</li>
+        </ul>
+    </section>
+
+    <section>
+        <h1>ngResource</h1>
+    </section>
+
+    <section>
+        <h2>ngResource philosophy</h2>
+        <ul>
+            <li>Generic - aims to work with <i>any</i> REST backend</li>
+            <li>Opinionated:
+                <ul>
+                    <li>all the URLs need to follow a certain pattern</li>
+                    <li>CRUD operation names and their mapping to HTTP verbs</li>
+                    <li>pre-defined response format</li>
+                </ul>
+            </li>
+            <li>Table Data Gateway and Active Record patterns</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Show me the code!</h2>
+        <pre><code ng-non-bindable=""><%= includeCode('exercises/07_backend_rest_resource/solution/userstorage.js', 'creating') %></code></pre>
+        <h4>More generally:</h4>
+<pre><code ng-non-bindable="">
+    ResourceClass = $resource('http://some/urls/with/:param1?other=:param2',
+        { param1: '@id', param2: 'some fixed value'},
+        { // custom actions go here});
+</code></pre>
+    </section>
+
+    <section>
+        <h2>$resource returns a constructor</h2>
+        <pre><code ng-non-bindable="">
+            var User = $resource('http://...', {...}, {...});
+
+            //get all users
+            User.query({}, function(users){
+                //do something with users here...
+            });
+
+            //create and save a user
+            var user = new User({name: 'Peter'});
+            user.$save();
+
+
+            //later on we can delete it
+            user.$remove();
+        </code></pre>
+    </section>
+
+
+    <section>
+        <h2>Methods generated in a new resource "class"</h2>
+        <ul>
+            <li>"Class" methods:
+                <ul>
+                    <li><code>User.get</code> (GET, object)</li>
+                    <li><code>User.query</code> (GET, array)</li>
+                    <li><code>User.save</code> (POST, object)</li>
+                    <li><code>User.remove</code> (DELETE, object)</li>
+                </ul>
+            </li>
+            <li>"Instance" methods:
+                <ul>
+                    <li><code>user.$save</code> (POST, object)</li>
+                    <li><code>user.$remove</code> (DELETE, object)</li>
+                </ul>
+            </li>
+            <li>There is no default <code>update</code> method!</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Usage scenarios - instance methods</h2>
+        <pre><code ng-non-bindable=""><%= includeCode('exercises/07_backend_rest_resource/solution/users.js', 'instance') %></code></pre>
+    </section>
+
+    <section>
+        <h2>Usage scenarios - class methods</h2>
+<pre><code ng-non-bindable="">
+    function refreshUsersList() {
+        $scope.users = User.query({});
+        console.log($scope.users[0]);
+    }
+</code></pre>
+        <h3>Is it synchronous??? Nope...</h3>
+<pre><code ng-non-bindable="">
+    function refreshUsersList() {
+        User.query({}, function(users) {
+            $scope.users = users;
+            console.log($scope.users[0]);
+        });
+    }
+</code></pre>
+    </section>
+
+    <section>
+        <h1>Exercise</h1>
+        <h2 stopwatch="30"></h2>
+        <p>Create the <code>User</code> resource and use it from a controller</p>
+    </section>
+
+</section>

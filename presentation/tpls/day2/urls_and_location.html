@@ -1,0 +1,170 @@
+<section>
+
+    <section>
+        <h1>URLs and navigation</h1>
+        <img src="http://cdn0.tnwcdn.com/wp-content/blogs.dir/1/files/2013/10/URL.jpg" alt=""/>
+    </section>
+
+    <section>
+        <h2>It all started good...</h2>
+        <h2>with a URL pointing to _one_ resource on a server...</h2>
+        <a>http://www.hotnews.com/sport/football.html</a>
+    </section>
+
+    <section>
+        <h2>Dynamic sites have broken URL model...</h2>
+        <h3>and back / forward buttons...</h3>
+        <h4>and refresh...</h4>
+        <a>http://www.hotnews.com/sport.asp?category=football</a>
+    </section>
+
+    <section>
+        <h2>AJAX made the situation only worse...</h2>
+        <h3>or have broken things differently...</h3>
+        <a>http://www.hotnews.com/sport.html#football</a>
+    </section>
+
+    <section>
+        <h2>Basic problem:</h2>
+        <h3>there is _one_ URL to denote current _state_ of an application</h3>
+        <ul>
+            <li>How to re-create application's state based on the URL?</li>
+            <li>How to change the URL in response to application's state changes?</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Ideally we would like to have "clean" URLs (HTML5 mode):</h2>
+        <ul>
+            <li><a>http://myapp.com/users/list</a></li>
+            <li><a>http://myapp.com/users/new</a></li>
+            <li><a>http://myapp.com/users/edit/[userid]</a></li>
+        </ul>
+        <p>without making round-trips to the server...</p>
+        <p>and still make URLs "bookmarkable"</p>
+    </section>
+
+    <section>
+        <h2>But we might need to stick to the "hashbang" mode</h2>
+        <ul>
+            <li><a>http://myapp.com#/users/list</a></li>
+            <li><a>http://myapp.com#/users/new</a></li>
+            <li><a>http://myapp.com#/users/edit/[userid]</a></li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>AngularJS makes it easy to work with "client-side" URLs</h2>
+        <h3>The $location service</h3>
+        <ul>
+            <li><a href="">http://myapp.com/#/users/list?sort=name#top</a></li>
+            <li><a href="">http://myapp.com/users/list?sort=name#top</a></li>
+        </ul>
+        <hr/>
+        <table width="80%" border="1">
+            <tr>
+                <th></th>
+                <th>HTML5</th>
+                <th>Hashbang</th>
+            </tr>
+            <tr>
+                <td>$location.path()</td>
+                <td>/users/list</td>
+                <td>/users/list</td>
+            </tr>
+            <tr>
+                <td>$location.search().sort</td>
+                <td>name</td>
+                <td>name</td>
+            </tr>
+            <tr>
+                <td>$location.hash()</td>
+                <td>top</td>
+                <td>top</td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <h2>We <i>could</i> build a navigation system based on the $location + ngInclude primtives...</h2>
+    </section>
+
+    <section>
+        <h1>Routing</h1>
+        <img src="http://upload.wikimedia.org/wikipedia/commons/d/d3/Viaduct_in_Puxi,_Shanghai.jpg" alt=""/>
+    </section>
+
+    <section>
+        <h2>$routeProvider</h2>
+        <pre><code ng-non-bindable=""><%= includeCode('exercises/09_ng_routing/solution/index.html','routes') %></code></pre>
+    </section>
+
+    <section>
+        <h2>Route's content gets included using ngView</h2>
+        <pre><code ng-non-bindable=""><div ng-view></div></code></pre>
+    </section>
+
+    <section>
+        <h2>Advantages</h2>
+        <ul>
+            <li>Structures the whole application</li>
+            <li>Makes it easy to split HTML / JS into smaller chunks</li>
+            <li>Handles URL parsing</li>
+            <li>Handles transitions in response to $location changes</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Let's see the live example and some more code</h2>
+    </section>
+
+    <section>
+        <h1>Exercise</h1>
+        <h2 stopwatch="40"></h2>
+        <p>Introduce routing to our demo application.</p>
+    </section>
+
+    <section>
+        <h2>It is all good, but...</h2>
+        <img src="http://i.stack.imgur.com/HxEa3.jpg" alt=""/>
+    </section>
+
+    <section>
+        <h2>We need to synchronize data retrieval with view changes</h2>
+    </section>
+
+    <section>
+        <h2>Promise API to the rescue</h2>
+        <pre><code ng-non-bindable=""><%= includeCode('exercises/10_ng_routing_resolve/solution/index.html','resolve') %></code></pre>
+    </section>
+
+    <section>
+        <h2>On top of this we can now <i>inject</i> data to a controller</h2>
+        <pre><code ng-non-bindable=""><%= includeCode('exercises/10_ng_routing_resolve/solution/users.js','inject') %></code></pre>
+        <p>making a controller easier to test</p>
+    </section>
+
+    <section>
+        <h2>Let's see the live example and some more code</h2>
+    </section>
+
+    <section>
+        <h1>Exercise</h1>
+        <h2 stopwatch="30"></h2>
+        <p>Introduce resolves into routing.</p>
+    </section>
+
+    <section>
+        <h2>$routeProvider limitations</h2>
+        <h3>There is only one "hole" to fill in (ngView)</h3>
+    </section>
+
+    <section>
+        <h2>UI-router and alternative solutions</h2>
+        <ul>
+            <li><a href="http://angular-ui.github.io/ui-router/site/" target="_blank">ui-router</a> - community driven alternative</li>
+            <li>Routing system pending re-design in AngularJS 2.0</li>
+        </ul>
+    </section>
+
+</section>

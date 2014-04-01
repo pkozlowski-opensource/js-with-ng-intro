@@ -1,0 +1,117 @@
+<section>
+    <section>
+        <h2>Internationalization</h2>
+        <img src="http://blog.lionbridge.com/translation/files/2013/07/International-Trade.jpg" alt=""/>
+    </section>
+
+    <section>
+        <h2>2 main aspects of i18n</h2>
+        <ul>
+            <li>Regional settings (date, number format, currency symbols etc.)</li>
+            <li>Translations (templates, error messages etc.)</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Determining / switching locale</h2>
+        <ul>
+            <li>Include a "proper" file</li>
+            <li>Declare a dependency on the ngLocale module (rather "static" method)</li>
+            <li>en-us is a default locale if none included</li>
+        </ul>
+        <pre><code ng-non-bindable=""><%= includeCode('presentation/tpls/day2/src/i18n.html') %></code></pre>
+    </section>
+
+    <section>
+        <h2>The $locale module</h2>
+        <ul>
+            <li>$locale.id is the only public API</li>
+            <li>more interesting settings extracted from the closure library</li>
+            <li>additional settings can be used in custom directives / filters</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Built-in filters take $locale into account</h2>
+        <ul>
+            <li>date - named date formats</li>
+            <li>number - number format</li>
+            <li>currency - this one is dangerous, probably better not to use it</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Named date formats</h2>
+        <pre><code ng-non-bindable=""><div>Now: {{now | date:'fullDate'}}</div></code></pre>
+    </section>
+
+    <section>
+        <h2>Translations</h2>
+        <ul>
+            <li>Templates</li>
+            <li>JavaScript-driven content (error messages etc.)</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Translating templates</h2>
+        <ul>
+            <li>Client-side</li>
+            <li>Server-side</li>
+            <li>In any case we need to have: <code>f(key, locale) => translation</code></li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Handling translations client-side - filters</h2>
+        <pre><code ng-non-bindable=""><label for="name">{{ 'label.name' | i18n}}: </label></code></pre>
+        <pre><code ng-non-bindable="">
+.filter('i18n', function ($locale, TRANSLATIONS) {
+    return function (input) {
+        if (!angular.isString(input)) {
+            return input;
+         }
+         return TRANSLATIONS[$locale.id][input] || '?' + input + '?';
+    };
+});
+        </code></pre>
+        <p>An "obvious" choice.. that doesn't scale...</p>
+    </section>
+
+    <section>
+        <h2>Handling translations client-side - directives</h2>
+        <pre><code ng-non-bindable=""><label i18n="'label.name'"></label></code></pre>
+        <p>This doesn't work either:</p>
+        <ul>
+            <li>Hard to combine translated / non-translated strings</li>
+            <li>Can't be used to translate strings in attributes</li>
+        </ul>
+        <pre><code ng-non-bindable=""><input type="text" placeholder="Name"></code></pre>
+    </section>
+
+    <section>
+        <h2>angular-translate</h2>
+        <a href="http://angular-translate.github.io/" target="_blank">angular-translate</a>
+        <p>The most popular library based on the filter / directive idea</p>
+    </section>
+
+    <section>
+        <h2>Handling translations server-side</h2>
+        <h3>Basic idea:</h3>
+        <ul>
+            <li>Use build-time templates translation</li>
+            <li>Generate a set of templates for each locale</li>
+            <li>Pre-load templates bundle</li>
+        </ul>
+        <br/>
+        <p>This is a preferred method, but requires a bit of up-front build setup.</p>
+        <p>It also make it hard to switch locale on the fly</p>
+    </section>
+
+    <section>
+        <h1>Exercise</h1>
+        <h2 stopwatch="15"></h2>
+        <p>Include alternative locale (pl-pl) in the simple test page and observe its effect on various filters.</p>
+    </section>
+
+</section>
