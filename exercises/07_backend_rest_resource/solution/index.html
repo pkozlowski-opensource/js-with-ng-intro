@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head>
+    <link rel="stylesheet" href="../../css/bootstrap.css"/>
+    <script src="../../lib/angular.js"></script>
+    <script src="../../lib/angular-resource.js"></script>
+    <script src="userstorage.js"></script>
+    <script src="users.js"></script>
+    <script>
+        angular.module('app', ['userstorageNgResource', 'usersNgResource'])
+                .constant('MONGOLAB_CONFIG', {
+                    API_KEY: '4fb51e55e4b02e56a67b0b66',
+                    DB_NAME: 'roche'
+                });
+    </script>
+</head>
+<body ng-controller="UsersCtrl">
+
+<div class="well">
+    <h3>Manage users</h3>
+    <form>
+        <div class="form-group">
+            <label for="id">Id: </label>
+            <input type="text" value="{{user.getId()|| 'A new user'}}" readonly id="id" class="form-control"/>
+        </div>
+        <div class="form-group">
+            <label for="login">Login: </label>
+            <input type="text" ng-model="user.login" id="login" class="form-control"/>
+        </div>
+        <div class="form-group">
+            <label for="name">Name: </label>
+            <input type="text" ng-model="user.name" id="name" class="form-control"/>
+        </div>
+        <div class="form-group">
+            <label for="birthDate">Date of birth: </label>
+            <input type="text" ng-model="user.birthDate" id="birthDate" class="form-control"/>
+        </div>
+        <button ng-click="save()" ng-disabled="!hasEdits()" class="btn btn-primary">Save</button>
+        <button ng-click="clear()" ng-disabled="!hasEdits()" class="btn btn-warning">Clear</button>
+    </form>
+</div>
+
+<hr/>
+<input type="search" ng-model="filterCriteria" class="form-control" placeholder="Filter users"/>
+<hr/>
+
+<table class="table table-bordered">
+    <tr>
+        <th>Id</th>
+        <th>Login</th>
+        <th>Name</th>
+        <th>Date of birth</th>
+        <th>Tools</th>
+    </tr>
+    <tr ng-repeat="user in users | filter:filterCriteria | limitTo:20">
+        <td>{{user.getId()}}</td>
+        <td>{{user.login}}</td>
+        <td>{{user.name}}</td>
+        <td>{{user.birthDate | date:'YYYY-MM-dd'}}</td>
+        <td>
+            <span ng-click="edit(user)" title="Edit" class="glyphicon glyphicon-edit"></span>
+            <span ng-click="remove(user)" title="Remove" class="glyphicon glyphicon-trash"></span>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

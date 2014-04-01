@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head>
+    <link rel="stylesheet" href="../../css/bootstrap.css"/>
+    <script src="../../lib/angular.js"></script>
+    <script src="../../lib/angular-route.js"></script>
+    <script src="../../lib/mongolab.js"></script>
+    <script src="userstorage.js"></script>
+    <script src="users.js"></script>
+    <script>
+        //slide:start:routes;
+        angular.module('app', ['ngRoute', 'usersNgRoute'])
+                .constant('MONGOLAB_CONFIG', {
+                    API_KEY: '4fb51e55e4b02e56a67b0b66',
+                    DB_NAME: 'roche'
+                })
+                //ex:start
+                .config(function ($routeProvider) {
+
+                    $routeProvider.when('/users/list', {
+                        templateUrl: 'list.html'
+                    })
+
+                    .when('/users/edit/new', {
+                        templateUrl: 'edit.html'
+                    })
+
+                    .when('/users/edit/:id', {
+                        templateUrl: 'edit.html'
+                    })
+
+                    .otherwise({
+                        redirectTo: '/users/list'
+                    });
+                });
+                //ex:end
+        //slide:end:routes;
+    </script>
+</head>
+<body>
+<div ng-view></div>
+</body>
+</html>

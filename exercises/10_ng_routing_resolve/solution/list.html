@@ -1,0 +1,29 @@
+<div>
+    <div class="well">
+        <input type="search" ng-model="filterCriteria" class="form-control" placeholder="Filter users"/>
+    </div>
+    <div>
+        <table class="table table-bordered">
+            <tr>
+                <th>Id</th>
+                <th>Login</th>
+                <th>Name</th>
+                <th>Date of birth</th>
+                <th>Tools</th>
+            </tr>
+            <tr ng-repeat="user in users | filter:filterCriteria | limitTo:20">
+                <td>{{user.getId()}}</td>
+                <td>{{user.login}}</td>
+                <td>{{user.name}}</td>
+                <td>{{user.birthDate | date:'YYYY-MM-dd'}}</td>
+                <td>
+                    <span ng-click="edit(user)" title="Edit" class="glyphicon glyphicon-edit"></span>
+                    <span ng-click="remove(user)" title="Remove" class="glyphicon glyphicon-trash"></span>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="well">
+        <a href="#/users/edit/new" class="btn btn-info">New</a>
+    </div>
+</div>

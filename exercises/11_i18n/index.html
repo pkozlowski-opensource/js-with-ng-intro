@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head>
+    <link rel="stylesheet" href="../../css/bootstrap.css"/>
+    <script src="../../lib/angular.js"></script>
+    <script src="i18n.js"></script>
+    <script>
+    </script>
+</head>
+<body ng-controller="I18nCtrl">
+<div class="well">
+    <h3>Locale: {{locale.id}}</h3>
+    <ul>
+        <li>Label: {{'header_mange_users' | i18n}}</li>
+        <li>Dates: {{now | date:'fullDate'}}</li>
+        <li>Numbers: {{number | number}}</li>
+        <li>Amounts: {{amount | currency}}</li>
+    </ul>
+</div>
+</body>
+</html>
