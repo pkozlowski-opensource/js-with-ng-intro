@@ -1,0 +1,84 @@
+<section>
+
+    <section>
+        <h2>Working with forms</h2>
+        <img src="https://www.vermontjudiciary.org/MasterImage/p-form.jpg" alt=""/>
+    </section>
+
+    <section>
+        <h2>Form controls available out of the box</h2>
+        <ul>
+            <li>Various types of inputs (text, number, date etc.)</li>
+            <li>Textarea</li>
+            <li>select</li>
+        </ul>
+
+    </section>
+
+    <section>
+        <h2>Validation: ingredients</h2>
+        <ul>
+            <li>We need a form element</li>
+            <li>A form needs a name</li>
+            <li>Each input needs a name as well</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Why do we need all those names?</h2>
+<pre><code ng-non-bindable><%= includeCode('exercises/12_forms/solution/edit.html', 'validation') %></code></pre>
+    </section>
+
+    <section>
+        <h2>Validation states</h2>
+        <ul>
+            <li>$valid / $invalid
+            <li>$error</li>
+            <li>$pristine / $dirty</li>
+        </ul>
+        <br/><br/>
+        <p>Those states are both reflected in JS as well as in HTML</p>
+    </section>
+
+    <section>
+        <h2>$valid / $invalid</h2>
+        <pre><code ng-non-bindable=""><span ng-class="{'glyphicon-ok': editform.login.$valid}"></span></code></pre>
+    </section>
+
+    <section>
+        <h2>$error</h2>
+        <pre><code ng-non-bindable=""><li ng-if="editform.login.$error.required">Login name is required</li>
+<li ng-if="editform.login.$error.minlength">Login name must be at least 8 characters</li></code></pre>
+    </section>
+
+    <section>
+        <h2>$pristine / $dirty</h2>
+        <pre><code ng-non-bindable=""><%= includeCode('exercises/12_forms/solution/edit.html', 'dirty') %></code></pre>
+    </section>
+
+    <section>
+        <h2>ngForm</h2>
+        <h3>HTML doesn't allow us to nest form elements</h3>
+        <ul>
+            <li>Grouping controls for validation</li>
+            <li>Work-around for a "dynamic name" problem</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Known limitations and pitfalls</h2>
+        <ul>
+            <li>"Dynamic names" and validation</li>
+            <li>Autofill doesn't update ngModel</li>
+            <li>"Clashes" with new HTML5 input types (number, date etc.)</li>
+        </ul>
+    </section>
+
+    <section>
+        <h1>Exercise</h1>
+        <h2 stopwatch="20"></h2>
+        <p>Add validation to the edit form.</p>
+        <p>Use any visual feedback for error reporting.</p>
+    </section>
+
+</section>

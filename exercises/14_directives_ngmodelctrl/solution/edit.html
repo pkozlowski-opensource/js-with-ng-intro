@@ -1,0 +1,35 @@
+<div class="well">
+    <div ng-if="editform.$invalid && editform.$dirty">
+        <p>Please correct validation errors:</p>
+        <ul>
+            <li ng-if="editform.login.$error.required">Login name is required</li>
+            <li ng-if="editform.login.$error.minlength">Login name must be at least 8 characters</li>
+            <li ng-if="editform.name.$error.required">User name is required</li>
+            <li ng-if="editform.birthdate.$error.required">Birth date is required</li>
+        </ul>
+    </div>
+    <form name="editform">
+        <div class="form-group">
+            <label for="id">Id: </label>
+            <input type="text" value="{{user.getId() || 'A new user'}}" readonly id="id" class="form-control"/>
+        </div>
+        <div class="form-group has-feedback" ng-class="{'has-success': editform.login.$valid, 'has-error': editform.login.$invalid}">
+            <label for="login">Login: </label>
+            <input name="login" type="text" ng-model="user.login" id="login" class="form-control" ng-required="true" ng-minlength="8"/>
+            <span class="glyphicon form-control-feedback" ng-class="{'glyphicon-ok': editform.login.$valid}"></span>
+        </div>
+        <div class="form-group has-feedback" ng-class="{'has-success': editform.name.$valid, 'has-error': editform.name.$invalid}">
+            <label for="name">Name: </label>
+            <input name="name" type="text" ng-model="user.name" id="name"  ng-required="true" class="form-control"/>
+            <span class="glyphicon form-control-feedback" ng-class="{'glyphicon-ok': editform.name.$valid}"></span>
+        </div>
+        <div class="form-group has-feedback" ng-class="{'has-success': editform.birthdate.$valid, 'has-error': editform.birthdate.$invalid}">
+            <label for="birthDate">Date of birth: </label>
+            <input name="birthdate" ng-model="user.birthDate" ng-required="true" moment-datefield="YYYY-MM-DD" placeholder="YYYY-MM-DD" id="birthDate" class="form-control" />
+            <span class="glyphicon form-control-feedback" ng-class="{'glyphicon-ok': editform.birthdate.$valid}"></span>
+        </div>
+        <button ng-click="save()" ng-disabled="!hasEdits() || editform.$invalid" class="btn btn-primary">Save</button>
+        <button ng-click="clear()" ng-disabled="!hasEdits()" class="btn btn-warning">Clear</button>
+        <a href="#/users/list" class="btn btn-warning">Cancel</a>
+    </form>
+</div>

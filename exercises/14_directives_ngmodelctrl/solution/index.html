@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head>
+    <link rel="stylesheet" href="../../css/bootstrap.css"/>
+    <script src="../../lib/angular.js"></script>
+    <script src="../../lib/angular-route.js"></script>
+    <script src="../../lib/mongolab.js"></script>
+    <script src="../../lib/moment.js"></script>
+    <script src="pagination.js"></script>
+    <script src="datefield.js"></script>
+    <script src="userstorage.js"></script>
+    <script src="users.js"></script>
+    <script>
+        angular.module('app', ['ngRoute', 'pagination', 'datefield', 'usersNgRouteResolve'])
+                .constant('MONGOLAB_CONFIG', {
+                    API_KEY: '4fb51e55e4b02e56a67b0b66',
+                    DB_NAME: 'roche'
+                })
+                .config(function ($routeProvider, $locationProvider) {
+
+                    //slide:start:resolve;
+                    $routeProvider.when('/users/list', {
+                        templateUrl: 'list.html',
+                        controller: 'UsersListCtrl',
+                        resolve: {
+                            users: function(User) {
+                                //if we return a promise, route change will be
+                                //suspended until a promise is resolved
+                                return User.getAll();
+                            }
+                        }
+                    });
+                    //slide:end:resolve;
+
+                    $routeProvider.when('/users/edit/new', {
+                        templateUrl: 'edit.html',
+                        controller: 'UserEditCtrl',
+                        resolve: {
+                            user: function(User) {
+                                return new User();
+                            }
+                        }
+                    });
+
+                    $routeProvider.when('/users/edit/:id', {
+                        templateUrl: 'edit.html',
+                        controller: 'UserEditCtrl',
+                        resolve: {
+                            user: function($route, User) {
+                                return User.getById($route.current.params.id).then(function (user) {
+                                   user.birthDate = new Date(user.birthDate);
+                                   return user;
+                                });
+                            }
+                        }
+                    });
+
+                    $routeProvider.otherwise({
+                        redirectTo: '/users/list'
+                    });
+                })
+    </script>
+</head>
+<body>
+    <div ng-view></div>
+</body>
+</html>

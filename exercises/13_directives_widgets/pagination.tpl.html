@@ -1,0 +1,14 @@
+<ul class="pagination">
+    <li ng-class="{disabled: !hasPrevious()}">
+        <a href ng-click="selectPage(selectedPage-1)">&laquo;</a>
+    </li>
+
+    <li ng-repeat="pageNumber in pageNumbers"
+        ng-class="{active: selectedPage == pageNumber}">
+        <a href ng-click="selectPage(pageNumber)">{{pageNumber}}</a>
+    </li>
+
+    <li ng-class="{disabled: !hasNext()}">
+        <a href ng-click="selectPage(selectedPage+1)">&raquo;</a>
+    </li>
+</ul>

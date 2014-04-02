@@ -1065,7 +1065,6 @@ angular.module('myDate', [])
         <h4>Storage service</h4>
         <pre><code ng-non-bindable="">angular.module(&apos;userstorageHttpResource&apos;, [&apos;mongolab&apos;])
   .factory(&apos;User&apos;, function ($mongolabResource) {
-
     return $mongolabResource(&apos;users&apos;);
   });</code></pre>
         <h4>Controller</h4>
@@ -1424,6 +1423,245 @@ angular.module('myDate', [])
         <h1>Exercise</h1>
         <h2 stopwatch="15"></h2>
         <p>Include alternative locale (pl-pl) in the simple test page and observe its effect on various filters.</p>
+    </section>
+
+</section>
+
+                <section>
+
+    <section>
+        <h2>Working with forms</h2>
+        <img src="https://www.vermontjudiciary.org/MasterImage/p-form.jpg" alt=""/>
+    </section>
+
+    <section>
+        <h2>Form controls available out of the box</h2>
+        <ul>
+            <li>Various types of inputs (text, number, date etc.)</li>
+            <li>Textarea</li>
+            <li>select</li>
+        </ul>
+
+    </section>
+
+    <section>
+        <h2>Validation: ingredients</h2>
+        <ul>
+            <li>We need a form element</li>
+            <li>A form needs a name</li>
+            <li>Each input needs a name as well</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Why do we need all those names?</h2>
+<pre><code ng-non-bindable> &lt;form name=&quot;editform&quot;&gt;
+     &lt;div class=&quot;form-group&quot;&gt;
+         &lt;label for=&quot;id&quot;&gt;Id: &lt;/label&gt;
+         &lt;input type=&quot;text&quot; value=&quot;{{user.getId() || &apos;A new user&apos;}}&quot; readonly id=&quot;id&quot; class=&quot;form-control&quot;/&gt;
+     &lt;/div&gt;
+     &lt;div class=&quot;form-group has-feedback&quot; ng-class=&quot;{&apos;has-success&apos;: editform.login.$valid, &apos;has-error&apos;: editform.login.$invalid}&quot;&gt;
+         &lt;label for=&quot;login&quot;&gt;Login: &lt;/label&gt;
+         &lt;input name=&quot;login&quot; type=&quot;text&quot; ng-model=&quot;user.login&quot; id=&quot;login&quot; class=&quot;form-control&quot; ng-required=&quot;true&quot; ng-minlength=&quot;8&quot;/&gt;
+         &lt;span class=&quot;glyphicon form-control-feedback&quot; ng-class=&quot;{&apos;glyphicon-ok&apos;: editform.login.$valid}&quot;&gt;&lt;/span&gt;
+     &lt;/div&gt;</code></pre>
+    </section>
+
+    <section>
+        <h2>Validation states</h2>
+        <ul>
+            <li>$valid / $invalid
+            <li>$error</li>
+            <li>$pristine / $dirty</li>
+        </ul>
+        <br/><br/>
+        <p>Those states are both reflected in JS as well as in HTML</p>
+    </section>
+
+    <section>
+        <h2>$valid / $invalid</h2>
+        <pre><code ng-non-bindable=""><span ng-class="{'glyphicon-ok': editform.login.$valid}"></span></code></pre>
+    </section>
+
+    <section>
+        <h2>$error</h2>
+        <pre><code ng-non-bindable=""><li ng-if="editform.login.$error.required">Login name is required</li>
+<li ng-if="editform.login.$error.minlength">Login name must be at least 8 characters</li></code></pre>
+    </section>
+
+    <section>
+        <h2>$pristine / $dirty</h2>
+        <pre><code ng-non-bindable=""> &lt;div ng-if=&quot;editform.$invalid &amp;&amp; editform.$dirty&quot;&gt;
+     &lt;p&gt;Please correct validation errors:&lt;/p&gt;
+     &lt;ul&gt;
+         &lt;li ng-if=&quot;editform.login.$error.required&quot;&gt;Login name is required&lt;/li&gt;
+         &lt;li ng-if=&quot;editform.login.$error.minlength&quot;&gt;Login name must be at least 8 characters&lt;/li&gt;
+         &lt;li ng-if=&quot;editform.name.$error.required&quot;&gt;User name is required&lt;/li&gt;
+         &lt;li ng-if=&quot;editform.birthdate.$error.required&quot;&gt;Birth date is required&lt;/li&gt;
+     &lt;/ul&gt;
+ &lt;/div&gt;</code></pre>
+    </section>
+
+    <section>
+        <h2>ngForm</h2>
+        <h3>HTML doesn't allow us to nest form elements</h3>
+        <ul>
+            <li>Grouping controls for validation</li>
+            <li>Work-around for a "dynamic name" problem</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Known limitations and pitfalls</h2>
+        <ul>
+            <li>"Dynamic names" and validation</li>
+            <li>Autofill doesn't update ngModel</li>
+            <li>"Clashes" with new HTML5 input types (number, date etc.)</li>
+        </ul>
+    </section>
+
+    <section>
+        <h1>Exercise</h1>
+        <h2 stopwatch="20"></h2>
+        <p>Add validation to the edit form.</p>
+        <p>Use any visual feedback for error reporting.</p>
+    </section>
+
+</section>
+                <section>
+
+    <section>
+        <h1>HTML compiler - directives</h1>
+        <img src="http://us.123rf.com/400wm/400/400/timbrk/timbrk1005/timbrk100500049/7066527-html-code-concept.jpg" alt=""/>
+    </section>
+
+    <section>
+        <h2>Custom DSL on top of HTML</h2>
+        <pre><code ng-non-bindable=""><h2 blink>I'm back</h2></code></pre>
+        <pre><code ng-non-bindable=""><blink><h2>I'm back</h2></blink></code></pre>
+        <blink><h2>I'm back</h2></blink>
+    </section>
+
+    <section>
+        <h2>Directives' superpowers</h2>
+        <ul>
+            <li>Define your own terminology</li>
+            <li>Avoid HTML code duplication</li>
+            <li>Encapsulate common UI elements (widgets)</li>
+            <li>Work on the higher abstraction level</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Directive exercises</h2>
+        <ul>
+            <li>Based on <a href="http://angular-ui.github.io/bootstrap/" target="_blank">angular-ui-bootstrap</a></li>
+            <li>More similar exercises in <a href="https://github.com/pkozlowski-opensource/directives-workshop" target="_blank">Devoxx directives-workshop</a></li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Widgets as mini-applications</h2>
+        <ul>
+            <li>We've got access to the DOM in a directive...</li>
+            <li>... but declarative UI principles still apply!</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>DOM-based testing</h2>
+        <ul>
+            <li>Principles</li>
+            <li>Manual compilation and DOM fragments</li>
+            <li>Filling in $templateCache</li>
+            <li>Making use of jQuery for asserts</li>
+            <li>Custom matchers</li>
+        </ul>
+    </section>
+
+    <section>
+        <h1>Exercise</h1>
+        <h2 stopwatch="40"></h2>
+        <p>Write a pagination directive and check the corresponding tests</p>
+        <p>Integrate the pagination directive and the pagination filter</p>
+    </section>
+
+    <section>
+        <h2>Input parsing and formatting</h2>
+        <ul>
+            <li>$formatters: model -> UI</li>
+            <li>$parsers: UI -> model</li>
+        </ul>
+    </section>
+
+    <section>
+        <h1>Exercise</h1>
+        <h2 stopwatch="30"></h2>
+        <p>Write a datefield directive and check the corresponding tests</p>
+    </section>
+
+
+</section>
+
+
+                <section>
+                    <h1>AngularJS internals</h1>
+                    <img src="http://ak3.picdn.net/shutterstock/videos/1374163/preview/stock-footage--d-background-with-endless-complex-clockwork-machinery-loop-depth-of-field.jpg" alt=""/>
+                </section>
+
+                <section>
+
+    <section>
+        <h1>On your own</h1>
+        <img src="http://pl.gerbergear.com/var/gerber_int/storage/images/frontpage/survival/gear/ultimate-kit_31-000701/299021-1-eng-US/Bear-Grylls-Survival-Series-Ultimate-Kit_fulljpg.jpg"
+             alt=""/>
+    </section>
+
+    <section>
+        <h2>Learning</h2>
+        <ul>
+            <li><a href="http://egghead.io/" target="_blank">egghead.io</a></li>
+            <li>Books</li>
+            <li><a href="http://www.youtube.com/channel/UCbn1OgGei-DV7aSRo_HaAiw" target="_blank">YouTube AngularJS channel</a></li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Getting help</h2>
+        <ul>
+            <li>StackOverflow - <a href="http://stackoverflow.com/questions/tagged/angularjs" target="_blank">angularjs</a></li>
+            <li><a href="mailto:angular@googlegroups.com">angular@googlegroups.com</a></li>
+            <li>#angularjs freenode IRC</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Help us to help you</h2>
+        <ul>
+            <li>Do your homework</li>
+            <li>Be clear and concise</li>
+            <li>Minimal reproduce scenario with plunker</li>
+            <li>Ask <a href="http://www.catb.org/~esr/faqs/smart-questions.html" target="_blank">smart questions</a></li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Contributting to AngularJS</h2>
+        <h3>Issues</h3>
+        <ul>
+            <li>Good, minimal reproduce scenario is the key</li>
+            <li>A failing unit test is even better!</li>
+            <li>Testing the latest build</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Contributting to AngularJS</h2>
+        <h3>Pull requests</h3>
+        <ul>
+            <li>Opening a good pull request</li>
+            <li>The process: CLI, commit conventions etc.</li>
+        </ul>
     </section>
 
 </section>
